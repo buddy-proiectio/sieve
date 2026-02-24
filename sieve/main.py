@@ -136,6 +136,7 @@ TARGET_KEYWORDS: Dict[str, List[str]] = {
         "NVO",
         "FDA",
     ],
+    "Commodities": ["Gold", "Silver"],
 }
 
 TARGET_TICKERS = [
