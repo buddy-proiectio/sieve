@@ -62,14 +62,12 @@ RESET_TIME_STR = "04:50"
 CHECK_INTERVAL_MINUTES = 10
 LOG_FILE = "sieve.log"
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s | %(levelname)-8s | %(message)s",
-    handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler(LOG_FILE, mode="a", encoding="utf-8"),
-    ],
-)
+import sys
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from shared_logger import setup_logger
+
+setup_logger(LOG_FILE)
 logger = logging.getLogger(__name__)
 
 # Suppress noisy lxml parsing warnings from trafilatura completely
