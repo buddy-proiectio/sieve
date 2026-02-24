@@ -60,7 +60,7 @@ except Exception:
 
 RESET_TIME_STR = "04:50"
 CHECK_INTERVAL_MINUTES = 10
-LOG_FILE = "sieve.log"
+LOG_FILE = "logs/sieve.log"
 
 import sys
 
