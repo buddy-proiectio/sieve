@@ -42,7 +42,7 @@ from typing import List, Dict, Set, Optional
 from dateutil import parser as date_parser
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
 # ==============================================================================
 # CONFIGURATION & CONSTANTS
