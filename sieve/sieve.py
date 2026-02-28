@@ -40,9 +40,6 @@ import yfinance as yf
 from datetime import datetime, timedelta
 from typing import List, Dict, Set, Optional
 from dateutil import parser as date_parser
-from dotenv import load_dotenv
-
-load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
 # ==============================================================================
 # CONFIGURATION & CONSTANTS
@@ -52,7 +49,7 @@ load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 try:
     import tzlocal
 
-    LOCAL_TZ_NAME = os.getenv("TIMEZONE") or tzlocal.get_localzone_name()
+    LOCAL_TZ_NAME = tzlocal.get_localzone_name()
     LOCAL_TZ = pytz.timezone(LOCAL_TZ_NAME)
 except Exception:
     LOCAL_TZ_NAME = "UTC"
@@ -620,7 +617,9 @@ def save_and_reset() -> None:
     master_payload = {
         "date": date_formatted,
         "market_indicators": fetch_market_indicators(),
-        "weekly_schedule": fetch_weekly_schedule(os.getenv("FINNHUB_API_KEY", "")),
+        "weekly_schedule": fetch_weekly_schedule(
+            "d6dsu29r01qm89pkrqj0d6dsu29r01qm89pkrqjg"
+        ),
         "articles": daily_articles_cache,
     }
 
