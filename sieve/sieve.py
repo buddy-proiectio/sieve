@@ -300,45 +300,46 @@ def fetch_market_indicators() -> dict:
     indicators = {}
 
     # Create cloudscraper session to bypass Yahoo blocks
-    scraper = cloudscraper.create_scraper(
+    with cloudscraper.create_scraper(
         browser={"browser": "chrome", "platform": "windows", "desktop": True}
-    )
+    ) as scraper:
+        for name, ticker in symbols.items():
+            try:
+                url = f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?interval=1d&range=5d"
+                response = scraper.get(url, timeout=10)
 
-    for name, ticker in symbols.items():
-        try:
-            url = f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?interval=1d&range=5d"
-            response = scraper.get(url, timeout=10)
+                if response.status_code == 200:
+                    data = response.json()["chart"]["result"][0]["meta"]
+                    last_close = data.get("regularMarketPrice")
+                    prev_close = data.get("chartPreviousClose")
 
-            if response.status_code == 200:
-                data = response.json()["chart"]["result"][0]["meta"]
-                last_close = data.get("regularMarketPrice")
-                prev_close = data.get("chartPreviousClose")
+                    if (
+                        last_close is not None
+                        and prev_close is not None
+                        and prev_close != 0
+                    ):
+                        change_pct = ((last_close - prev_close) / prev_close) * 100
 
-                if (
-                    last_close is not None
-                    and prev_close is not None
-                    and prev_close != 0
-                ):
-                    change_pct = ((last_close - prev_close) / prev_close) * 100
+                        # Format price with commas
+                        price_str = f"{last_close:,.2f}"
 
-                    # Format price with commas
-                    price_str = f"{last_close:,.2f}"
+                        # Explicitly add + sign for positive numbers
+                        sign = "+" if change_pct > 0 else ""
+                        change_str = f"{sign}{change_pct:.2f}%"
 
-                    # Explicitly add + sign for positive numbers
-                    sign = "+" if change_pct > 0 else ""
-                    change_str = f"{sign}{change_pct:.2f}%"
-
-                    indicators[name] = {"price": price_str, "change": change_str}
+                        indicators[name] = {"price": price_str, "change": change_str}
+                    else:
+                        logger.debug(f"{name}: Insufficient API chart values.")
+                        indicators[name] = {"price": "N/A", "change": "N/A"}
                 else:
-                    logger.debug(f"{name}: Insufficient API chart values.")
+                    logger.error(f"{name}: Yahoo API returned {response.status_code}")
                     indicators[name] = {"price": "N/A", "change": "N/A"}
-            else:
-                logger.error(f"{name}: Yahoo API returned {response.status_code}")
-                indicators[name] = {"price": "N/A", "change": "N/A"}
 
-        except Exception as e:
-            logger.error(f"Failed to fetch market indicator for {name} ({ticker}): {e}")
-            indicators[name] = {"price": "N/A", "change": "N/A"}
+            except Exception as e:
+                logger.error(
+                    f"Failed to fetch market indicator for {name} ({ticker}): {e}"
+                )
+                indicators[name] = {"price": "N/A", "change": "N/A"}
 
     return indicators
 
@@ -372,10 +373,11 @@ def fetch_weekly_schedule(finnhub_api_key: str) -> dict:
         import xml.etree.ElementTree as ET
 
         url = "https://nfs.faireconomy.media/ff_calendar_thisweek.xml"
-        response = requests.get(url, timeout=30)
-        response.raise_for_status()
+        with requests.get(url, timeout=30) as response:
+            response.raise_for_status()
+            content = response.content
 
-        root = ET.fromstring(response.content)
+        root = ET.fromstring(content)
         for event in root.findall("event"):
             country_elem = event.find("country")
             impact_elem = event.find("impact")
@@ -410,25 +412,30 @@ def fetch_weekly_schedule(finnhub_api_key: str) -> dict:
         try:
             logger.info("Fetching weekly earnings schedule via Finnhub API...")
             finnhub_url = f"https://finnhub.io/api/v1/calendar/earnings?from={start_date}&to={end_date}&token={finnhub_api_key}"
-            response = requests.get(finnhub_url, timeout=30)
+            with requests.get(finnhub_url, timeout=30) as response:
+                if response.status_code == 200:
+                    data = response.json()
+                    earnings_calendar = data.get("earningsCalendar", [])
 
-            if response.status_code == 200:
-                data = response.json()
-                earnings_calendar = data.get("earningsCalendar", [])
-
-                for entry in earnings_calendar:
-                    ticker = entry.get("symbol")
-                    if ticker in TARGET_TICKERS:
-                        date_str = entry.get("date")  # "YYYY-MM-DD"
-                        if date_str:
-                            event_date = datetime.strptime(date_str, "%Y-%m-%d").date()
-                            if event_date in dates_to_check:
-                                day_str = f"{event_date.strftime('%b')} {event_date.day} ({weekdays[event_date.weekday()]})"
-                                formatted_event = f"★ [Earnings] {ticker} Earnings Call"
-                                if formatted_event not in schedule_dict[day_str]:
-                                    schedule_dict[day_str].append(formatted_event)
-            else:
-                logger.error(f"Finnhub API returned status code {response.status_code}")
+                    for entry in earnings_calendar:
+                        ticker = entry.get("symbol")
+                        if ticker in TARGET_TICKERS:
+                            date_str = entry.get("date")  # "YYYY-MM-DD"
+                            if date_str:
+                                event_date = datetime.strptime(
+                                    date_str, "%Y-%m-%d"
+                                ).date()
+                                if event_date in dates_to_check:
+                                    day_str = f"{event_date.strftime('%b')} {event_date.day} ({weekdays[event_date.weekday()]})"
+                                    formatted_event = (
+                                        f"★ [Earnings] {ticker} Earnings Call"
+                                    )
+                                    if formatted_event not in schedule_dict[day_str]:
+                                        schedule_dict[day_str].append(formatted_event)
+                else:
+                    logger.error(
+                        f"Finnhub API returned status code {response.status_code}"
+                    )
 
         except Exception as e:
             logger.error(f"Failed to fetch Finnhub Earnings: {e}")
@@ -492,14 +499,15 @@ def fetch_full_content(url: str, feed_name: str, title: str) -> tuple[str, str]:
         sleep_time = random.uniform(1, 3)
         time.sleep(sleep_time)
 
-        scraper = cloudscraper.create_scraper(
+        with cloudscraper.create_scraper(
             browser={"browser": "chrome", "platform": "windows", "desktop": True}
-        )
-        response = scraper.get(url, timeout=15)
-        response.raise_for_status()
+        ) as scraper:
+            response = scraper.get(url, timeout=15)
+            response.raise_for_status()
+            content = response.content
 
         # Trafilatura handles byte content better to prevent lxml parsing errors and charset issues
-        extracted_text = trafilatura.extract(response.content)
+        extracted_text = trafilatura.extract(content)
         if extracted_text and len(extracted_text.strip()) > 50:
             return extracted_text.strip(), "success"
         else:
@@ -513,10 +521,11 @@ def fetch_full_content(url: str, feed_name: str, title: str) -> tuple[str, str]:
 
 def process_rss_feed(feed_name: str, feed_url: str) -> None:
     try:
-        response = requests.get(feed_url, headers=get_headers(), timeout=15)
-        response.raise_for_status()
+        with requests.get(feed_url, headers=get_headers(), timeout=15) as response:
+            response.raise_for_status()
+            content = response.content
 
-        feed = feedparser.parse(response.content)
+        feed = feedparser.parse(content)
         if feed.bozo:
             logger.debug(
                 f"Malformed XML detected in {feed_name}, feedparser recovering..."
