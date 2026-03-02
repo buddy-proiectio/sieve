@@ -34,6 +34,7 @@ import os
 import random
 import difflib
 import pytz
+import holidays
 import cloudscraper
 import trafilatura
 import yfinance as yf
@@ -346,14 +347,13 @@ def fetch_market_indicators() -> dict:
 
 def fetch_weekly_schedule(finnhub_api_key: str) -> dict:
     """
-    Fetches Macro Events (via Forex Factory XML Archive) and Earnings Calls (via Finnhub API)
-    for the window [Today ~ Today + 7 days]. Groups elements by Korean Date Keys.
+    Fetches Macro Events (via Forex Factory XML Archive), Earnings Calls (via Finnhub API),
+    and Holidays for US & AU for the window [Today ~ Today + 7 days].
     """
-    KST = pytz.timezone("Asia/Seoul")
-    now_kst = datetime.now(KST)
+    now_local = datetime.now(LOCAL_TZ)
 
     # Target 7-day window: Today + 7 days (8 days total including today)
-    dates_to_check = [now_kst.date() + timedelta(days=i) for i in range(8)]
+    dates_to_check = [now_local.date() + timedelta(days=i) for i in range(8)]
 
     start_date = dates_to_check[0].strftime("%Y-%m-%d")
     end_date = dates_to_check[-1].strftime("%Y-%m-%d")
@@ -365,6 +365,31 @@ def fetch_weekly_schedule(finnhub_api_key: str) -> dict:
     for d in dates_to_check:
         day_str = f"{d.strftime('%b')} {d.day} ({weekdays[d.weekday()]})"
         schedule_dict[day_str] = []
+
+    # --------------------------------------------------------------------------
+    # Part 0: US and Australia Public Holidays
+    # --------------------------------------------------------------------------
+    us_holidays = holidays.US(years=[dates_to_check[0].year, dates_to_check[-1].year])
+    au_holidays = holidays.AU(years=[dates_to_check[0].year, dates_to_check[-1].year])
+
+    for d in dates_to_check:
+        day_str = f"{d.strftime('%b')} {d.day} ({weekdays[d.weekday()]})"
+        us_event = us_holidays.get(d)
+        au_event = au_holidays.get(d)
+
+        if us_event and au_event and us_event == au_event:
+            formatted_event = f"★ [Holiday] {us_event}"
+            if formatted_event not in schedule_dict[day_str]:
+                schedule_dict[day_str].append(formatted_event)
+        else:
+            if us_event:
+                formatted_event = f"★ [US Holiday] {us_event}"
+                if formatted_event not in schedule_dict[day_str]:
+                    schedule_dict[day_str].append(formatted_event)
+            if au_event:
+                formatted_event = f"★ [AU Holiday] {au_event}"
+                if formatted_event not in schedule_dict[day_str]:
+                    schedule_dict[day_str].append(formatted_event)
 
     # --------------------------------------------------------------------------
     # Part A: Macro Events (via Forex Factory XML)
@@ -609,6 +634,24 @@ def process_rss_feed(feed_name: str, feed_url: str) -> None:
 # ==============================================================================
 
 
+def is_us_trading_day(dt: datetime) -> bool:
+    """
+    Checks if the given datetime corresponds to a US trading day.
+    US trading days are Monday-Friday excluding NYSE holidays.
+    """
+    us_tz = pytz.timezone("America/New_York")
+    us_dt = dt.astimezone(us_tz).date()
+
+    if us_dt.weekday() >= 5:
+        return False
+
+    nyse_holidays = holidays.financial_holidays("US", years=us_dt.year)
+    if us_dt in nyse_holidays:
+        return False
+
+    return True
+
+
 def save_and_reset() -> None:
     """
     Triggered precisely at 04:50 AM (Local Time).
@@ -619,6 +662,13 @@ def save_and_reset() -> None:
     logger.info("---| EXECUTING DAILY SAVE & RESET |---")
 
     now = datetime.now(LOCAL_TZ)
+
+    if not is_us_trading_day(now):
+        logger.info(
+            f"---| US Market is closed (Weekend/Holiday) for {now.strftime('%Y-%m-%d')}. Accumulating data... |---"
+        )
+        return
+
     date_str = now.strftime("%Y%m%d")
     date_formatted = now.strftime("%Y-%m-%d %I:%M %p")
     filename = f"daily_news_{date_str}.json"
