@@ -21,6 +21,7 @@ Supported Sources:
 13. NASA News (RSS)
 14. Seeking Alpha (General, transcripts, healthcare, Ticker RSS)
 15. X Gurus via Nitter RSS
+16. Stratechery (RSS)
 """
 
 import feedparser
@@ -189,6 +190,7 @@ STATIC_RSS_FEEDS = {
     "Seeking Alpha WSB": "https://seekingalpha.com/tag/wall-st-breakfast.xml",
     "Seeking Alpha Transcripts": "https://seekingalpha.com/sector/transcripts.xml",
     "Seeking Alpha Healthcare": "https://seekingalpha.com/sector/health-care.xml",
+    "Stratechery": "https://stratechery.com/feed/",
 }
 
 ALL_KEYWORDS: List[str] = [kw for group in TARGET_KEYWORDS.values() for kw in group]
