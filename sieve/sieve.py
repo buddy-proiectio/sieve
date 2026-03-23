@@ -57,7 +57,7 @@ except Exception:
     LOCAL_TZ_NAME = "UTC"
     LOCAL_TZ = pytz.UTC
 
-RESET_TIME_STR = "04:50"
+RESET_TIME_STR = "03:30"
 CHECK_INTERVAL_MINUTES = 10
 LOG_FILE = "logs/sieve.log"
 
@@ -251,16 +251,16 @@ def generate_dynamic_rss_feeds() -> Dict[str, str]:
 def get_current_window_start() -> datetime:
     """
     Returns the start datetime of the current 24-hour cycle.
-    The window spans from 04:51 AM today to 04:50 AM tomorrow (Local Time).
+    The window spans from 03:31 AM today to 03:30 AM tomorrow (Local Time).
     """
     now = datetime.now(LOCAL_TZ)
     reset_time = datetime.strptime(RESET_TIME_STR, "%H:%M").time()
 
     if now.time() < reset_time:
-        # Before 04:50 AM, the cycle started yesterday at 04:50 AM
+        # Before 03:30 AM, the cycle started yesterday at 03:30 AM
         start_date = now.date() - timedelta(days=1)
     else:
-        # After or at 04:50 AM, the cycle started today at 04:50 AM
+        # After or at 03:30 AM, the cycle started today at 03:30 AM
         start_date = now.date()
 
     start_dt = datetime.combine(start_date, reset_time)
@@ -573,7 +573,7 @@ def process_rss_feed(feed_name: str, feed_url: str) -> None:
             pub_dt = parse_published_time(pub_str)
 
             if pub_dt < window_start:
-                # Article was published before 04:50 AM of the current cycle start; ignoring.
+                # Article was published before 03:30 AM of the current cycle start; ignoring.
                 continue
 
             pub_iso = pub_dt.isoformat()
@@ -656,7 +656,7 @@ def is_us_trading_day(dt: datetime) -> bool:
 
 def save_and_reset() -> None:
     """
-    Triggered precisely at 04:50 AM (Local Time).
+    Triggered precisely at 03:30 AM (Local Time).
     Dumps the master daily payload to a timestamped JSON file, then resets.
     """
     global daily_articles_cache, seen_urls
@@ -727,11 +727,10 @@ def main():
         # 1. Schedule the repeating interval
         schedule.every(CHECK_INTERVAL_MINUTES).minutes.do(the_sieve_job)
 
-        # 2. Schedule the Daily Save & Reset explicitly using the Local Timezone at 04:50
-        # The `schedule` library accepts timezone string identifiers like 'Asia/Seoul'.
+        # 2. Schedule the Daily Save & Reset explicitly using the Local Timezone at 03:30
         try:
-            schedule.every().day.at("04:50", tz=LOCAL_TZ_NAME).do(save_and_reset)
-            logger.info(f"Scheduled daily dump for 04:50 AM {LOCAL_TZ_NAME} timezone.")
+            schedule.every().day.at("03:30", tz=LOCAL_TZ_NAME).do(save_and_reset)
+            logger.info(f"Scheduled daily dump for 03:30 AM {LOCAL_TZ_NAME} timezone.")
         except Exception as e:
             logger.error(
                 f"Timezone schedule registration failed (check schedule library version): {e}"
