@@ -112,6 +112,13 @@ TARGET_KEYWORDS: Dict[str, List[str]] = {
         "Meta",
         "META",
         "OpenAI",
+        "TSMC",
+        "TSM",
+        "Intel",
+        "INTC",
+        "Google",
+        "Alphabet",
+        "GOOG",
     ],
     "Future Tech/Others": [
         "Eli Lilly",
@@ -132,6 +139,11 @@ TARGET_KEYWORDS: Dict[str, List[str]] = {
         "LLY",
         "NVO",
         "FDA",
+        "Robinhood",
+        "HOOD",
+        "Exxon",
+        "ExxonMobil",
+        "XOM",
     ],
     "Commodities": ["Gold", "Silver"],
 }
@@ -152,6 +164,11 @@ TARGET_TICKERS = [
     "AMD",
     "LLY",
     "NVO",
+    "TSM",
+    "INTC",
+    "GOOG",
+    "HOOD",
+    "XOM",
 ]
 
 X_GURUS = [
