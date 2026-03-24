@@ -208,6 +208,9 @@ STATIC_RSS_FEEDS = {
     "Seeking Alpha Transcripts": "https://seekingalpha.com/sector/transcripts.xml",
     "Seeking Alpha Healthcare": "https://seekingalpha.com/sector/health-care.xml",
     "Stratechery": "https://stratechery.com/feed/",
+    "The Diff": "https://www.thediff.co/feed/",
+    "SemiAnalysis": "https://www.semianalysis.com/feed/",
+    "Lyn Alden": "https://www.lynalden.com/feed/",
 }
 
 ALL_KEYWORDS: List[str] = [kw for group in TARGET_KEYWORDS.values() for kw in group]
