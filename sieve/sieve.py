@@ -429,8 +429,27 @@ def fetch_weekly_schedule(finnhub_api_key: str) -> dict:
             country = country_elem.text if country_elem is not None else ""
             impact = impact_elem.text if impact_elem is not None else ""
 
-            # We strictly want US high impact macro events
-            if country == "USD" and impact == "High":
+            include_event = False
+            macro_prefix = ""
+
+            if country in ["JPY", "AUD", "CNY", "EUR"] and impact == "High":
+                include_event = True
+                if country == "JPY":
+                    macro_prefix = "[JP Macro]"
+                elif country == "AUD":
+                    macro_prefix = "[AU Macro]"
+                elif country == "CNY":
+                    macro_prefix = "[CN Macro]"
+                elif country == "EUR":
+                    macro_prefix = "[EUR Macro]"
+            elif country == "USD" and impact in ["High", "Medium"]:
+                include_event = True
+                if impact == "High":
+                    macro_prefix = "★ [US Macro]"
+                else:
+                    macro_prefix = "[US Macro]"
+
+            if include_event:
                 date_elem = event.find("date")  # Typical format: MM-DD-YYYY
                 title_elem = event.find("title")
 
@@ -442,7 +461,7 @@ def fetch_weekly_schedule(finnhub_api_key: str) -> dict:
                     event_date = datetime.strptime(date_str, "%m-%d-%Y").date()
                     if event_date in dates_to_check:
                         day_str = f"{event_date.strftime('%b')} {event_date.day} ({weekdays[event_date.weekday()]})"
-                        formatted_event = f"★ [Macro] {title}"
+                        formatted_event = f"{macro_prefix} {title}"
                         if formatted_event not in schedule_dict[day_str]:
                             schedule_dict[day_str].append(formatted_event)
 
