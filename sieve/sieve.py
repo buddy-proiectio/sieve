@@ -22,6 +22,9 @@ Supported Sources:
 14. Seeking Alpha (General, transcripts, healthcare, Ticker RSS)
 15. X Gurus via Nitter RSS
 16. Stratechery (RSS)
+17. The Diff (RSS)
+18. SemiAnalysis (RSS)
+19. Lyn Alden (RSS)
 """
 
 import feedparser
