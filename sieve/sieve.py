@@ -66,11 +66,45 @@ LOG_FILE = "logs/sieve.log"
 
 import sys
 
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from shared_logger import setup_logger
 
-setup_logger(LOG_FILE)
+class ColoredFormatter(logging.Formatter):
+    def format(self, record):
+        time_str = self.formatTime(record, "%y-%m-%d %H:%M:%S")
+        level_name = f"{record.levelname:8}"
+        color_code = "\x1b[32m"
+        if record.levelno == logging.WARNING:
+            color_code = "\x1b[33m"
+        elif record.levelno >= logging.ERROR:
+            color_code = "\x1b[31m"
+        reset_code = "\x1b[0m"
+        return (
+            f"{color_code}{time_str} - {level_name}{reset_code} | {record.getMessage()}"
+        )
+
+
+log_dir = os.path.dirname(LOG_FILE)
+if log_dir:
+    os.makedirs(log_dir, exist_ok=True)
+
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+if logger.hasHandlers():
+    logger.handlers.clear()
+logger.propagate = False
+
+file_formatter = logging.Formatter(
+    "%(asctime)s - %(levelname)-8s | %(message)s", datefmt="%y-%m-%d %H:%M:%S"
+)
+
+console_handler = logging.StreamHandler(sys.stdout)
+console_handler.setFormatter(ColoredFormatter())
+
+file_handler = logging.FileHandler(LOG_FILE, mode="a", encoding="utf-8")
+file_handler.setFormatter(file_formatter)
+
+logger.addHandler(console_handler)
+logger.addHandler(file_handler)
 
 # Suppress noisy lxml parsing warnings from trafilatura completely
 logging.getLogger("trafilatura").setLevel(logging.CRITICAL)
