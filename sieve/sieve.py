@@ -27,87 +27,46 @@ Supported Sources:
 19. Lyn Alden (RSS)
 """
 
-import feedparser
-import requests
+import sys
+import os
 import re
-import json
 import logging
 import schedule
 import time
-import os
 import random
-import difflib
 import pytz
-import holidays
+import feedparser
+import requests
+import difflib
 import cloudscraper
 import trafilatura
-import yfinance as yf
 from datetime import datetime, timedelta
-from typing import List, Dict, Set, Optional
+from typing import List, Dict, Set
 from dateutil import parser as date_parser
+from market_engine import fetch_market_map
+from daily_job import execute_daily_save_and_reset
+
+# Add project root to sys.path to allow importing from 'shared'
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from shared.shared_logger import setup_logger
+
+logger = setup_logger("logs/sieve.log", "sieve")
+
+# Suppress noisy lxml parsing warnings from trafilatura completely
+logging.getLogger("trafilatura").setLevel(logging.CRITICAL)
 
 # ==============================================================================
 # CONFIGURATION & CONSTANTS
 # ==============================================================================
 
 # Timezone and Scheduling Configurations
-try:
-    import tzlocal
+LOCAL_TZ_NAME = "America/New_York"
+LOCAL_TZ = pytz.timezone(LOCAL_TZ_NAME)
 
-    LOCAL_TZ_NAME = tzlocal.get_localzone_name()
-    LOCAL_TZ = pytz.timezone(LOCAL_TZ_NAME)
-except Exception:
-    LOCAL_TZ_NAME = "UTC"
-    LOCAL_TZ = pytz.UTC
-
-RESET_TIME_STR = "03:30"
+RESET_TIME_STR = "07:30"
 CHECK_INTERVAL_MINUTES = 10
 LOG_FILE = "logs/sieve.log"
 
-import sys
-
-
-class ColoredFormatter(logging.Formatter):
-    def format(self, record):
-        time_str = self.formatTime(record, "%y-%m-%d %H:%M:%S")
-        level_name = f"{record.levelname:8}"
-        color_code = "\x1b[32m"
-        if record.levelno == logging.WARNING:
-            color_code = "\x1b[33m"
-        elif record.levelno >= logging.ERROR:
-            color_code = "\x1b[31m"
-        reset_code = "\x1b[0m"
-        return (
-            f"{color_code}{time_str} - {level_name}{reset_code} | {record.getMessage()}"
-        )
-
-
-log_dir = os.path.dirname(LOG_FILE)
-if log_dir:
-    os.makedirs(log_dir, exist_ok=True)
-
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-
-if logger.hasHandlers():
-    logger.handlers.clear()
-logger.propagate = False
-
-file_formatter = logging.Formatter(
-    "%(asctime)s - %(levelname)-8s | %(message)s", datefmt="%y-%m-%d %H:%M:%S"
-)
-
-console_handler = logging.StreamHandler(sys.stdout)
-console_handler.setFormatter(ColoredFormatter())
-
-file_handler = logging.FileHandler(LOG_FILE, mode="a", encoding="utf-8")
-file_handler.setFormatter(file_formatter)
-
-logger.addHandler(console_handler)
-logger.addHandler(file_handler)
-
-# Suppress noisy lxml parsing warnings from trafilatura completely
-logging.getLogger("trafilatura").setLevel(logging.CRITICAL)
 
 # User-Agents for robust bypassing
 USER_AGENTS = [
@@ -131,31 +90,21 @@ def get_headers() -> dict:
 # Target Keywords Dictionary
 TARGET_KEYWORDS: Dict[str, List[str]] = {
     "Macro": ["FOMC", "CPI", "Fed", "Interest rate"],
-    "Crypto": ["Bitcoin", "BTC"],
+    "Crypto": ["Bitcoin", "Ethereum", "Crypto"],
     "US Core Tech": [
         "Tesla",
-        "TSLA",
         "Nvidia",
-        "NVDA",
         "Anthropic",
         "Palantir",
-        "PLTR",
         "Apple",
-        "AAPL",
         "Amazon",
-        "AMZN",
         "Microsoft",
-        "MSFT",
         "Meta",
-        "META",
         "OpenAI",
         "TSMC",
-        "TSM",
         "Intel",
-        "INTC",
         "Google",
         "Alphabet",
-        "GOOG",
     ],
     "Future Tech/Others": [
         "Eli Lilly",
@@ -163,24 +112,14 @@ TARGET_KEYWORDS: Dict[str, List[str]] = {
         "SpaceX",
         "NASA",
         "Broadcom",
-        "AVGO",
         "Micron",
-        "MU",
         "Walmart",
-        "WMT",
         "Oracle",
-        "ORCL",
         "Netflix",
-        "NFLX",
         "AMD",
-        "LLY",
-        "NVO",
-        "FDA",
         "Robinhood",
-        "HOOD",
-        "Exxon",
         "ExxonMobil",
-        "XOM",
+        "FDA",
     ],
     "Commodities": ["Gold", "Silver"],
 }
@@ -308,16 +247,16 @@ def generate_dynamic_rss_feeds() -> Dict[str, str]:
 def get_current_window_start() -> datetime:
     """
     Returns the start datetime of the current 24-hour cycle.
-    The window spans from 03:31 AM today to 03:30 AM tomorrow (Local Time).
+    The window spans from 07:31 AM today to 07:30 AM tomorrow (Local Time).
     """
     now = datetime.now(LOCAL_TZ)
     reset_time = datetime.strptime(RESET_TIME_STR, "%H:%M").time()
 
     if now.time() < reset_time:
-        # Before 03:30 AM, the cycle started yesterday at 03:30 AM
+        # Before 07:30 AM, the cycle started yesterday at 07:30 AM
         start_date = now.date() - timedelta(days=1)
     else:
-        # After or at 03:30 AM, the cycle started today at 03:30 AM
+        # After or at 07:30 AM, the cycle started today at 07:30 AM
         start_date = now.date()
 
     start_dt = datetime.combine(start_date, reset_time)
@@ -337,215 +276,6 @@ def parse_published_time(published_str: str) -> datetime:
         pass
     # Fallback to current local time if parsing completely fails
     return datetime.now(LOCAL_TZ)
-
-
-# ==============================================================================
-# MARKET INDICATORS & SCHEDULE LOGIC
-# ==============================================================================
-
-
-def fetch_market_indicators() -> dict:
-    """
-    Fetches real-time closing price and daily percentage change for
-    Dow Jones, S&P 500, Nasdaq, and Bitcoin.
-    Bypasses yfinance library blocks by querying the raw Yahoo v8 chart API directly.
-    """
-    symbols = {
-        "Dow Jones": "^DJI",
-        "S&P 500": "^GSPC",
-        "Nasdaq": "^IXIC",
-        "Bitcoin": "BTC-USD",
-    }
-
-    indicators = {}
-
-    # Create cloudscraper session to bypass Yahoo blocks
-    with cloudscraper.create_scraper(
-        browser={"browser": "chrome", "platform": "windows", "desktop": True}
-    ) as scraper:
-        for name, ticker in symbols.items():
-            try:
-                url = f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?interval=1d&range=5d"
-                response = scraper.get(url, timeout=10)
-
-                if response.status_code == 200:
-                    data = response.json()["chart"]["result"][0]["meta"]
-                    last_close = data.get("regularMarketPrice")
-                    prev_close = data.get("chartPreviousClose")
-
-                    if (
-                        last_close is not None
-                        and prev_close is not None
-                        and prev_close != 0
-                    ):
-                        change_pct = ((last_close - prev_close) / prev_close) * 100
-
-                        # Format price with commas
-                        price_str = f"{last_close:,.2f}"
-
-                        # Explicitly add + sign for positive numbers
-                        sign = "+" if change_pct > 0 else ""
-                        change_str = f"{sign}{change_pct:.2f}%"
-
-                        indicators[name] = {"price": price_str, "change": change_str}
-                    else:
-                        logger.debug(f"{name}: Insufficient API chart values.")
-                        indicators[name] = {"price": "N/A", "change": "N/A"}
-                else:
-                    logger.error(f"{name}: Yahoo API returned {response.status_code}")
-                    indicators[name] = {"price": "N/A", "change": "N/A"}
-
-            except Exception as e:
-                logger.error(
-                    f"Failed to fetch market indicator for {name} ({ticker}): {e}"
-                )
-                indicators[name] = {"price": "N/A", "change": "N/A"}
-
-    return indicators
-
-
-def fetch_weekly_schedule(finnhub_api_key: str) -> dict:
-    """
-    Fetches Macro Events (via Forex Factory XML Archive), Earnings Calls (via Finnhub API),
-    and Holidays for US & AU for the window [Today ~ Today + 7 days].
-    """
-    now_local = datetime.now(LOCAL_TZ)
-
-    # Target 7-day window: Today + 7 days (8 days total including today)
-    dates_to_check = [now_local.date() + timedelta(days=i) for i in range(8)]
-
-    start_date = dates_to_check[0].strftime("%Y-%m-%d")
-    end_date = dates_to_check[-1].strftime("%Y-%m-%d")
-
-    schedule_dict = {}
-    weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-
-    # Initialize dictionary keys with English formatting
-    for d in dates_to_check:
-        day_str = f"{d.strftime('%b')} {d.day} ({weekdays[d.weekday()]})"
-        schedule_dict[day_str] = []
-
-    # --------------------------------------------------------------------------
-    # Part 0: US and Australia Public Holidays
-    # --------------------------------------------------------------------------
-    us_holidays = holidays.US(years=[dates_to_check[0].year, dates_to_check[-1].year])
-    au_holidays = holidays.AU(years=[dates_to_check[0].year, dates_to_check[-1].year])
-
-    for d in dates_to_check:
-        day_str = f"{d.strftime('%b')} {d.day} ({weekdays[d.weekday()]})"
-        us_event = us_holidays.get(d)
-        au_event = au_holidays.get(d)
-
-        if us_event and au_event and us_event == au_event:
-            formatted_event = f"★ [Holiday] {us_event}"
-            if formatted_event not in schedule_dict[day_str]:
-                schedule_dict[day_str].append(formatted_event)
-        else:
-            if us_event:
-                formatted_event = f"★ [US Holiday] {us_event}"
-                if formatted_event not in schedule_dict[day_str]:
-                    schedule_dict[day_str].append(formatted_event)
-            if au_event:
-                formatted_event = f"★ [AU Holiday] {au_event}"
-                if formatted_event not in schedule_dict[day_str]:
-                    schedule_dict[day_str].append(formatted_event)
-
-    # --------------------------------------------------------------------------
-    # Part A: Macro Events (via Forex Factory XML)
-    # --------------------------------------------------------------------------
-    try:
-        import xml.etree.ElementTree as ET
-
-        url = "https://nfs.faireconomy.media/ff_calendar_thisweek.xml"
-        with requests.get(url, timeout=30) as response:
-            response.raise_for_status()
-            content = response.content
-
-        root = ET.fromstring(content)
-        for event in root.findall("event"):
-            country_elem = event.find("country")
-            impact_elem = event.find("impact")
-
-            country = country_elem.text if country_elem is not None else ""
-            impact = impact_elem.text if impact_elem is not None else ""
-
-            include_event = False
-            macro_prefix = ""
-
-            if country in ["JPY", "AUD", "CNY", "EUR"] and impact == "High":
-                include_event = True
-                if country == "JPY":
-                    macro_prefix = "[JP Macro]"
-                elif country == "AUD":
-                    macro_prefix = "[AU Macro]"
-                elif country == "CNY":
-                    macro_prefix = "[CN Macro]"
-                elif country == "EUR":
-                    macro_prefix = "[EUR Macro]"
-            elif country == "USD" and impact in ["High", "Medium"]:
-                include_event = True
-                if impact == "High":
-                    macro_prefix = "★ [US Macro]"
-                else:
-                    macro_prefix = "[US Macro]"
-
-            if include_event:
-                date_elem = event.find("date")  # Typical format: MM-DD-YYYY
-                title_elem = event.find("title")
-
-                date_str = date_elem.text if date_elem is not None else ""
-                title = title_elem.text if title_elem is not None else "Unknown Event"
-
-                if date_str:
-                    # FF's XML date format is `m-d-Y`
-                    event_date = datetime.strptime(date_str, "%m-%d-%Y").date()
-                    if event_date in dates_to_check:
-                        day_str = f"{event_date.strftime('%b')} {event_date.day} ({weekdays[event_date.weekday()]})"
-                        formatted_event = f"{macro_prefix} {title}"
-                        if formatted_event not in schedule_dict[day_str]:
-                            schedule_dict[day_str].append(formatted_event)
-
-    except Exception as e:
-        logger.error(f"Failed to fetch Forex Factory Macro XML: {e}")
-
-    # --------------------------------------------------------------------------
-    # Part B: Earnings Calls (via Finnhub API)
-    # --------------------------------------------------------------------------
-    if finnhub_api_key:
-        try:
-            logger.info("Fetching weekly earnings schedule via Finnhub API...")
-            finnhub_url = f"https://finnhub.io/api/v1/calendar/earnings?from={start_date}&to={end_date}&token={finnhub_api_key}"
-            with requests.get(finnhub_url, timeout=30) as response:
-                if response.status_code == 200:
-                    data = response.json()
-                    earnings_calendar = data.get("earningsCalendar", [])
-
-                    for entry in earnings_calendar:
-                        ticker = entry.get("symbol")
-                        if ticker in TARGET_TICKERS:
-                            date_str = entry.get("date")  # "YYYY-MM-DD"
-                            if date_str:
-                                event_date = datetime.strptime(
-                                    date_str, "%Y-%m-%d"
-                                ).date()
-                                if event_date in dates_to_check:
-                                    day_str = f"{event_date.strftime('%b')} {event_date.day} ({weekdays[event_date.weekday()]})"
-                                    formatted_event = (
-                                        f"★ [Earnings] {ticker} Earnings Call"
-                                    )
-                                    if formatted_event not in schedule_dict[day_str]:
-                                        schedule_dict[day_str].append(formatted_event)
-                else:
-                    logger.error(
-                        f"Finnhub API returned status code {response.status_code}"
-                    )
-
-        except Exception as e:
-            logger.error(f"Failed to fetch Finnhub Earnings: {e}")
-    else:
-        logger.warning("Finnhub API key not found. Skipping earnings.")
-
-    return schedule_dict
 
 
 # ==============================================================================
@@ -578,11 +308,24 @@ def is_duplicate(new_title: str, current_cache: List[dict]) -> bool:
 def find_keywords(text: str) -> List[str]:
     if not text:
         return []
-    matched = []
+    matched = set()
     for original_kw, pattern in KEYWORD_PATTERNS.items():
         if pattern.search(text):
-            matched.append(original_kw)
-    return matched
+            # Normalize duplicates like Meta/META
+            normalized_kw = original_kw
+            if original_kw.upper() == "META":
+                normalized_kw = "Meta"
+            if original_kw.upper() == "GOOG":
+                normalized_kw = "Google"
+            if original_kw.upper() == "AAPL":
+                normalized_kw = "Apple"
+            if original_kw.upper() == "TSM":
+                normalized_kw = "TSMC"
+            if original_kw.upper() == "NVDA":
+                normalized_kw = "Nvidia"
+
+            matched.add(normalized_kw)
+    return sorted(list(matched))
 
 
 def strip_html_tags(text: str) -> str:
@@ -649,7 +392,7 @@ def process_rss_feed(feed_name: str, feed_url: str) -> None:
             pub_dt = parse_published_time(pub_str)
 
             if pub_dt < window_start:
-                # Article was published before 03:30 AM of the current cycle start; ignoring.
+                # Article was published before 07:30 AM of the current cycle start; ignoring.
                 continue
 
             pub_iso = pub_dt.isoformat()
@@ -708,76 +451,13 @@ def process_rss_feed(feed_name: str, feed_url: str) -> None:
 
 
 # ==============================================================================
-# SCHEDULER & PIPELINE START
-# ==============================================================================
-
-
-def is_us_trading_day(dt: datetime) -> bool:
-    """
-    Checks if the given datetime corresponds to a US trading day.
-    US trading days are Monday-Friday excluding NYSE holidays.
-    """
-    us_tz = pytz.timezone("America/New_York")
-    us_dt = dt.astimezone(us_tz).date()
-
-    if us_dt.weekday() >= 5:
-        return False
-
-    nyse_holidays = holidays.financial_holidays("US", years=us_dt.year)
-    if us_dt in nyse_holidays:
-        return False
-
-    return True
-
-
-def save_and_reset() -> None:
-    """
-    Triggered precisely at 03:30 AM (Local Time).
-    Dumps the master daily payload to a timestamped JSON file, then resets.
-    """
-    global daily_articles_cache, seen_urls
-
-    logger.info("---| EXECUTING DAILY SAVE & RESET |---")
-
-    now = datetime.now(LOCAL_TZ)
-
-    if not is_us_trading_day(now):
-        logger.info(
-            f"---| US Market is closed (Weekend/Holiday) for {now.strftime('%Y-%m-%d')}. Accumulating data... |---"
-        )
-        return
-
-    date_str = now.strftime("%Y%m%d")
-    date_formatted = now.strftime("%Y-%m-%d %I:%M %p")
-    filename = f"daily_news_{date_str}.json"
-
-    master_payload = {
-        "date": date_formatted,
-        "market_indicators": fetch_market_indicators(),
-        "weekly_schedule": fetch_weekly_schedule(
-            "d6dsu29r01qm89pkrqj0d6dsu29r01qm89pkrqjg"
-        ),
-        "articles": daily_articles_cache,
-    }
-
-    try:
-        data_dir = os.path.join(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data"
-        )
-        os.makedirs(data_dir, exist_ok=True)
-        filepath = os.path.join(data_dir, filename)
-        with open(filepath, "w", encoding="utf-8") as f:
-            json.dump(master_payload, f, ensure_ascii=False, indent=2)
-        logger.info(
-            f"Successfully saved Master Daily Payload ({len(daily_articles_cache)} articles) to {filename}."
-        )
-    except Exception as e:
-        logger.error(f"Failed to save {filename}: {e}")
-
-    # Purge the in-memory cache to begin the new 24hr cycle
-    daily_articles_cache.clear()
-    seen_urls.clear()
-    logger.info("---| Reset complete. Booting the fresh cycle. |---")
+def trigger_daily_save():
+    execute_daily_save_and_reset(
+        daily_articles_cache,
+        seen_urls,
+        TARGET_TICKERS,
+        "d6dsu29r01qm89pkrqj0d6dsu29r01qm89pkrqjg",
+    )
 
 
 def the_sieve_job() -> None:
@@ -803,10 +483,10 @@ def main():
         # 1. Schedule the repeating interval
         schedule.every(CHECK_INTERVAL_MINUTES).minutes.do(the_sieve_job)
 
-        # 2. Schedule the Daily Save & Reset explicitly using the Local Timezone at 03:30
+        # 2. Schedule the Daily Save & Reset explicitly using the Local Timezone at 07:30
         try:
-            schedule.every().day.at("03:30", tz=LOCAL_TZ_NAME).do(save_and_reset)
-            logger.info(f"Scheduled daily dump for 03:30 AM {LOCAL_TZ_NAME} timezone.")
+            schedule.every().day.at("07:30", tz=LOCAL_TZ_NAME).do(trigger_daily_save)
+            logger.info(f"Scheduled daily dump for 07:30 AM {LOCAL_TZ_NAME} timezone.")
         except Exception as e:
             logger.error(
                 f"Timezone schedule registration failed (check schedule library version): {e}"
@@ -820,7 +500,7 @@ def main():
         logger.info("Shutdown signal received. Process terminating.")
         if daily_articles_cache:
             logger.info("Flushing remaining cache to file before exit...")
-            save_and_reset()
+            trigger_daily_save()
 
 
 if __name__ == "__main__":
