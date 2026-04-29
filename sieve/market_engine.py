@@ -1,8 +1,19 @@
 import json
 import os
 import sys
+import threading
 import cloudscraper
 import concurrent.futures
+
+thread_local = threading.local()
+
+
+def get_scraper():
+    if not hasattr(thread_local, "scraper"):
+        thread_local.scraper = cloudscraper.create_scraper(
+            browser={"browser": "chrome", "platform": "windows", "desktop": True}
+        )
+    return thread_local.scraper
 
 
 # Add project root to sys.path to allow importing from 'shared'
@@ -15,8 +26,8 @@ logger = setup_logger("logs/sieve.log", "sieve")
 def fetch_market_map() -> dict:
     """
     Fetches real-time closing price and daily percentage change for
-    Dow Jones, S&P 500, Nasdaq, Bitcoin, and all S&P 500 constituents concurrently.
-    Groups the S&P 500 stocks by Sector and Industry.
+    Dow Jones, S&P 500, Nasdaq, Bitcoin, and curated market targets concurrently.
+    Groups the target stocks by Sector and Industry.
     """
     # 1. Base Indices
     base_symbols = {
@@ -26,7 +37,7 @@ def fetch_market_map() -> dict:
         "Bitcoin": "BTC-USD",
     }
 
-    # 2. Load Market Map Targets (S&P 500 + Custom Tickers)
+    # 2. Load Market Map Targets
     targets_file = os.path.join(
         os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
         "shared",
@@ -34,14 +45,14 @@ def fetch_market_map() -> dict:
     )
     try:
         with open(targets_file, "r", encoding="utf-8") as f:
-            sp500_data = json.load(f)
+            market_targets = json.load(f)
     except Exception as e:
-        logger.error(f"Failed to load S&P 500 mapping: {e}")
-        sp500_data = []
+        logger.error(f"Failed to load market map targets: {e}")
+        market_targets = []
 
     # Prepare targets
     fetch_targets = list(base_symbols.values())
-    for item in sp500_data:
+    for item in market_targets:
         symbol = item.get("Symbol")
         if symbol and symbol not in fetch_targets:
             fetch_targets.append(symbol)
@@ -50,10 +61,8 @@ def fetch_market_map() -> dict:
     fetched_data = {}
 
     def fetch_single(ticker):
-        scraper = cloudscraper.create_scraper(
-            browser={"browser": "chrome", "platform": "windows", "desktop": True}
-        )
-        # Handle BRK.B / BF.B formatting for Yahoo
+        scraper = get_scraper()
+        # Handle BRK.B formatting for Yahoo
         y_ticker = ticker.replace(".", "-") if "." in ticker else ticker
         url = f"https://query1.finance.yahoo.com/v8/finance/chart/{y_ticker}?interval=1d&range=5d"
         try:
@@ -74,7 +83,7 @@ def fetch_market_map() -> dict:
         return ticker, None
 
     logger.info(f"Fetching {len(fetch_targets)} market tickers concurrently...")
-    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=7) as executor:
         results = executor.map(fetch_single, fetch_targets)
         for ticker, data in results:
             if data:
@@ -99,39 +108,10 @@ def fetch_market_map() -> dict:
                 "change": format_pct(d["change_pct"]),
             }
 
-    # Process S&P 500 stocks
-    symbol_info = {item["Symbol"]: item for item in sp500_data}
+    # Process target stocks
+    symbol_info = {item["Symbol"]: item for item in market_targets}
 
-    # Optional Fallback Tickers that might not be in JSON
-    TARGET_TICKERS = [
-        "TSLA",
-        "NVDA",
-        "PLTR",
-        "AAPL",
-        "AMZN",
-        "MSFT",
-        "META",
-        "AVGO",
-        "MU",
-        "WMT",
-        "ORCL",
-        "NFLX",
-        "AMD",
-        "LLY",
-        "NVO",
-        "TSM",
-        "INTC",
-        "GOOG",
-        "HOOD",
-        "XOM",
-    ]
-    for t in TARGET_TICKERS:
-        if t not in symbol_info:
-            symbol_info[t] = {
-                "GICS Sector": "Other Target Tickers",
-                "GICS Sub-Industry": "Miscellaneous",
-            }
-
+    # Use GICS Sector mapping from JSON directly
     for ticker, d in fetched_data.items():
         if ticker in base_symbols.values():
             continue

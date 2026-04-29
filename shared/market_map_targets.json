@@ -1,1583 +1,8 @@
 [
   {
-    "Symbol": "MMM",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Industrial Conglomerates"
-  },
-  {
-    "Symbol": "AOS",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Building Products"
-  },
-  {
-    "Symbol": "ABT",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Equipment"
-  },
-  {
-    "Symbol": "ABBV",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Biotechnology"
-  },
-  {
-    "Symbol": "ACN",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "IT Consulting & Other Services"
-  },
-  {
-    "Symbol": "ADBE",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Application Software"
-  },
-  {
-    "Symbol": "AMD",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
-  },
-  {
-    "Symbol": "AES",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Independent Power Producers & Energy Traders"
-  },
-  {
-    "Symbol": "AFL",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Life & Health Insurance"
-  },
-  {
-    "Symbol": "A",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Life Sciences Tools & Services"
-  },
-  {
-    "Symbol": "APD",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Industrial Gases"
-  },
-  {
-    "Symbol": "ABNB",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Hotels, Resorts & Cruise Lines"
-  },
-  {
-    "Symbol": "AKAM",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Internet Services & Infrastructure"
-  },
-  {
-    "Symbol": "ALB",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Specialty Chemicals"
-  },
-  {
-    "Symbol": "ARE",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Office REITs"
-  },
-  {
-    "Symbol": "ALGN",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Supplies"
-  },
-  {
-    "Symbol": "ALLE",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Building Products"
-  },
-  {
-    "Symbol": "LNT",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Electric Utilities"
-  },
-  {
-    "Symbol": "ALL",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Property & Casualty Insurance"
-  },
-  {
-    "Symbol": "GOOGL",
-    "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Interactive Media & Services"
-  },
-  {
-    "Symbol": "GOOG",
-    "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Interactive Media & Services"
-  },
-  {
-    "Symbol": "MO",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Tobacco"
-  },
-  {
-    "Symbol": "AMZN",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Broadline Retail"
-  },
-  {
-    "Symbol": "AMCR",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Paper & Plastic Packaging Products & Materials"
-  },
-  {
-    "Symbol": "AEE",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Multi-Utilities"
-  },
-  {
-    "Symbol": "AEP",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Electric Utilities"
-  },
-  {
-    "Symbol": "AXP",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Consumer Finance"
-  },
-  {
-    "Symbol": "AIG",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Multi-line Insurance"
-  },
-  {
-    "Symbol": "AMT",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Telecom Tower REITs"
-  },
-  {
-    "Symbol": "AWK",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Water Utilities"
-  },
-  {
-    "Symbol": "AMP",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Asset Management & Custody Banks"
-  },
-  {
-    "Symbol": "AME",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Electrical Components & Equipment"
-  },
-  {
-    "Symbol": "AMGN",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Biotechnology"
-  },
-  {
-    "Symbol": "APH",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Electronic Components"
-  },
-  {
-    "Symbol": "ADI",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
-  },
-  {
-    "Symbol": "AON",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Insurance Brokers"
-  },
-  {
-    "Symbol": "APA",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Exploration & Production"
-  },
-  {
-    "Symbol": "APO",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Asset Management & Custody Banks"
-  },
-  {
     "Symbol": "AAPL",
     "GICS Sector": "Information Technology",
     "GICS Sub-Industry": "Technology Hardware, Storage & Peripherals"
-  },
-  {
-    "Symbol": "AMAT",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductor Materials & Equipment"
-  },
-  {
-    "Symbol": "APP",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Application Software"
-  },
-  {
-    "Symbol": "APTV",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Automotive Parts & Equipment"
-  },
-  {
-    "Symbol": "ACGL",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Property & Casualty Insurance"
-  },
-  {
-    "Symbol": "ADM",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Agricultural Products & Services"
-  },
-  {
-    "Symbol": "ARES",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Asset Management & Custody Banks"
-  },
-  {
-    "Symbol": "ANET",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Communications Equipment"
-  },
-  {
-    "Symbol": "AJG",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Insurance Brokers"
-  },
-  {
-    "Symbol": "AIZ",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Multi-line Insurance"
-  },
-  {
-    "Symbol": "T",
-    "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Integrated Telecommunication Services"
-  },
-  {
-    "Symbol": "ATO",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Gas Utilities"
-  },
-  {
-    "Symbol": "ADSK",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Application Software"
-  },
-  {
-    "Symbol": "ADP",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Human Resource & Employment Services"
-  },
-  {
-    "Symbol": "AZO",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Automotive Retail"
-  },
-  {
-    "Symbol": "AVB",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Multi-Family Residential REITs"
-  },
-  {
-    "Symbol": "AVY",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Paper & Plastic Packaging Products & Materials"
-  },
-  {
-    "Symbol": "AXON",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Aerospace & Defense"
-  },
-  {
-    "Symbol": "BKR",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Equipment & Services"
-  },
-  {
-    "Symbol": "BALL",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Metal, Glass & Plastic Containers"
-  },
-  {
-    "Symbol": "BAC",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Diversified Banks"
-  },
-  {
-    "Symbol": "BAX",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Equipment"
-  },
-  {
-    "Symbol": "BDX",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Equipment"
-  },
-  {
-    "Symbol": "BRK.B",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Multi-Sector Holdings"
-  },
-  {
-    "Symbol": "BBY",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Computer & Electronics Retail"
-  },
-  {
-    "Symbol": "TECH",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Life Sciences Tools & Services"
-  },
-  {
-    "Symbol": "BIIB",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Biotechnology"
-  },
-  {
-    "Symbol": "BLK",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Asset Management & Custody Banks"
-  },
-  {
-    "Symbol": "BX",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Asset Management & Custody Banks"
-  },
-  {
-    "Symbol": "XYZ",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Transaction & Payment Processing Services"
-  },
-  {
-    "Symbol": "BK",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Asset Management & Custody Banks"
-  },
-  {
-    "Symbol": "BA",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Aerospace & Defense"
-  },
-  {
-    "Symbol": "BKNG",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Hotels, Resorts & Cruise Lines"
-  },
-  {
-    "Symbol": "BSX",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Equipment"
-  },
-  {
-    "Symbol": "BMY",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Pharmaceuticals"
-  },
-  {
-    "Symbol": "AVGO",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
-  },
-  {
-    "Symbol": "BR",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Data Processing & Outsourced Services"
-  },
-  {
-    "Symbol": "BRO",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Insurance Brokers"
-  },
-  {
-    "Symbol": "BF.B",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Distillers & Vintners"
-  },
-  {
-    "Symbol": "BLDR",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Building Products"
-  },
-  {
-    "Symbol": "BG",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Agricultural Products & Services"
-  },
-  {
-    "Symbol": "BXP",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Office REITs"
-  },
-  {
-    "Symbol": "CHRW",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Air Freight & Logistics"
-  },
-  {
-    "Symbol": "CDNS",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Application Software"
-  },
-  {
-    "Symbol": "CPT",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Multi-Family Residential REITs"
-  },
-  {
-    "Symbol": "CPB",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Packaged Foods & Meats"
-  },
-  {
-    "Symbol": "COF",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Consumer Finance"
-  },
-  {
-    "Symbol": "CAH",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Distributors"
-  },
-  {
-    "Symbol": "CCL",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Hotels, Resorts & Cruise Lines"
-  },
-  {
-    "Symbol": "CARR",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Building Products"
-  },
-  {
-    "Symbol": "CVNA",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Automotive Retail"
-  },
-  {
-    "Symbol": "CASY",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Food Retail"
-  },
-  {
-    "Symbol": "CAT",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Construction Machinery & Heavy Transportation Equipment"
-  },
-  {
-    "Symbol": "CBOE",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Financial Exchanges & Data"
-  },
-  {
-    "Symbol": "CBRE",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Real Estate Services"
-  },
-  {
-    "Symbol": "CDW",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Technology Distributors"
-  },
-  {
-    "Symbol": "COR",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Distributors"
-  },
-  {
-    "Symbol": "CNC",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Managed Health Care"
-  },
-  {
-    "Symbol": "CNP",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Multi-Utilities"
-  },
-  {
-    "Symbol": "CF",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Fertilizers & Agricultural Chemicals"
-  },
-  {
-    "Symbol": "CRL",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Life Sciences Tools & Services"
-  },
-  {
-    "Symbol": "SCHW",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Investment Banking & Brokerage"
-  },
-  {
-    "Symbol": "CHTR",
-    "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Cable & Satellite"
-  },
-  {
-    "Symbol": "CVX",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Integrated Oil & Gas"
-  },
-  {
-    "Symbol": "CMG",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Restaurants"
-  },
-  {
-    "Symbol": "CB",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Property & Casualty Insurance"
-  },
-  {
-    "Symbol": "CHD",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Household Products"
-  },
-  {
-    "Symbol": "CIEN",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Communications Equipment"
-  },
-  {
-    "Symbol": "CI",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Services"
-  },
-  {
-    "Symbol": "CINF",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Property & Casualty Insurance"
-  },
-  {
-    "Symbol": "CTAS",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Diversified Support Services"
-  },
-  {
-    "Symbol": "CSCO",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Communications Equipment"
-  },
-  {
-    "Symbol": "C",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Diversified Banks"
-  },
-  {
-    "Symbol": "CFG",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Regional Banks"
-  },
-  {
-    "Symbol": "CLX",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Household Products"
-  },
-  {
-    "Symbol": "CME",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Financial Exchanges & Data"
-  },
-  {
-    "Symbol": "CMS",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Multi-Utilities"
-  },
-  {
-    "Symbol": "KO",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Soft Drinks & Non-alcoholic Beverages"
-  },
-  {
-    "Symbol": "CTSH",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "IT Consulting & Other Services"
-  },
-  {
-    "Symbol": "COHR",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Electronic Components"
-  },
-  {
-    "Symbol": "COIN",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Financial Exchanges & Data"
-  },
-  {
-    "Symbol": "CL",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Household Products"
-  },
-  {
-    "Symbol": "CMCSA",
-    "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Cable & Satellite"
-  },
-  {
-    "Symbol": "FIX",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Construction & Engineering"
-  },
-  {
-    "Symbol": "CAG",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Packaged Foods & Meats"
-  },
-  {
-    "Symbol": "COP",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Exploration & Production"
-  },
-  {
-    "Symbol": "ED",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Multi-Utilities"
-  },
-  {
-    "Symbol": "STZ",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Distillers & Vintners"
-  },
-  {
-    "Symbol": "CEG",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Electric Utilities"
-  },
-  {
-    "Symbol": "COO",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Supplies"
-  },
-  {
-    "Symbol": "CPRT",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Diversified Support Services"
-  },
-  {
-    "Symbol": "GLW",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Electronic Components"
-  },
-  {
-    "Symbol": "CPAY",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Transaction & Payment Processing Services"
-  },
-  {
-    "Symbol": "CTVA",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Fertilizers & Agricultural Chemicals"
-  },
-  {
-    "Symbol": "CSGP",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Real Estate Services"
-  },
-  {
-    "Symbol": "COST",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Consumer Staples Merchandise Retail"
-  },
-  {
-    "Symbol": "CTRA",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Exploration & Production"
-  },
-  {
-    "Symbol": "CRH",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Construction Materials"
-  },
-  {
-    "Symbol": "CRWD",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Systems Software"
-  },
-  {
-    "Symbol": "CCI",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Telecom Tower REITs"
-  },
-  {
-    "Symbol": "CSX",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Rail Transportation"
-  },
-  {
-    "Symbol": "CMI",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Construction Machinery & Heavy Transportation Equipment"
-  },
-  {
-    "Symbol": "CVS",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Services"
-  },
-  {
-    "Symbol": "DHR",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Life Sciences Tools & Services"
-  },
-  {
-    "Symbol": "DRI",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Restaurants"
-  },
-  {
-    "Symbol": "DDOG",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Application Software"
-  },
-  {
-    "Symbol": "DVA",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Services"
-  },
-  {
-    "Symbol": "DECK",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Footwear"
-  },
-  {
-    "Symbol": "DE",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Agricultural & Farm Machinery"
-  },
-  {
-    "Symbol": "DELL",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Technology Hardware, Storage & Peripherals"
-  },
-  {
-    "Symbol": "DAL",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Passenger Airlines"
-  },
-  {
-    "Symbol": "DVN",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Exploration & Production"
-  },
-  {
-    "Symbol": "DXCM",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Equipment"
-  },
-  {
-    "Symbol": "FANG",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Exploration & Production"
-  },
-  {
-    "Symbol": "DLR",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Data Center REITs"
-  },
-  {
-    "Symbol": "DG",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Consumer Staples Merchandise Retail"
-  },
-  {
-    "Symbol": "DLTR",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Consumer Staples Merchandise Retail"
-  },
-  {
-    "Symbol": "D",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Multi-Utilities"
-  },
-  {
-    "Symbol": "DPZ",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Restaurants"
-  },
-  {
-    "Symbol": "DASH",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Specialized Consumer Services"
-  },
-  {
-    "Symbol": "DOV",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Industrial Machinery & Supplies & Components"
-  },
-  {
-    "Symbol": "DOW",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Commodity Chemicals"
-  },
-  {
-    "Symbol": "DHI",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Homebuilding"
-  },
-  {
-    "Symbol": "DTE",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Multi-Utilities"
-  },
-  {
-    "Symbol": "DUK",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Electric Utilities"
-  },
-  {
-    "Symbol": "DD",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Specialty Chemicals"
-  },
-  {
-    "Symbol": "ETN",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Electrical Components & Equipment"
-  },
-  {
-    "Symbol": "EBAY",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Broadline Retail"
-  },
-  {
-    "Symbol": "SATS",
-    "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Wireless Telecommunication Services"
-  },
-  {
-    "Symbol": "ECL",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Specialty Chemicals"
-  },
-  {
-    "Symbol": "EIX",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Electric Utilities"
-  },
-  {
-    "Symbol": "EW",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Equipment"
-  },
-  {
-    "Symbol": "EA",
-    "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Interactive Home Entertainment"
-  },
-  {
-    "Symbol": "ELV",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Managed Health Care"
-  },
-  {
-    "Symbol": "EME",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Construction & Engineering"
-  },
-  {
-    "Symbol": "EMR",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Electrical Components & Equipment"
-  },
-  {
-    "Symbol": "ETR",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Electric Utilities"
-  },
-  {
-    "Symbol": "EOG",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Exploration & Production"
-  },
-  {
-    "Symbol": "EPAM",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "IT Consulting & Other Services"
-  },
-  {
-    "Symbol": "EQT",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Exploration & Production"
-  },
-  {
-    "Symbol": "EFX",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Research & Consulting Services"
-  },
-  {
-    "Symbol": "EQIX",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Data Center REITs"
-  },
-  {
-    "Symbol": "EQR",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Multi-Family Residential REITs"
-  },
-  {
-    "Symbol": "ERIE",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Insurance Brokers"
-  },
-  {
-    "Symbol": "ESS",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Multi-Family Residential REITs"
-  },
-  {
-    "Symbol": "EL",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Personal Care Products"
-  },
-  {
-    "Symbol": "EG",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Reinsurance"
-  },
-  {
-    "Symbol": "EVRG",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Electric Utilities"
-  },
-  {
-    "Symbol": "ES",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Electric Utilities"
-  },
-  {
-    "Symbol": "EXC",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Electric Utilities"
-  },
-  {
-    "Symbol": "EXE",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Exploration & Production"
-  },
-  {
-    "Symbol": "EXPE",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Hotels, Resorts & Cruise Lines"
-  },
-  {
-    "Symbol": "EXPD",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Air Freight & Logistics"
-  },
-  {
-    "Symbol": "EXR",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Self-Storage REITs"
-  },
-  {
-    "Symbol": "XOM",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Integrated Oil & Gas"
-  },
-  {
-    "Symbol": "FFIV",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Communications Equipment"
-  },
-  {
-    "Symbol": "FDS",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Financial Exchanges & Data"
-  },
-  {
-    "Symbol": "FICO",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Application Software"
-  },
-  {
-    "Symbol": "FAST",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Trading Companies & Distributors"
-  },
-  {
-    "Symbol": "FRT",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Retail REITs"
-  },
-  {
-    "Symbol": "FDX",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Air Freight & Logistics"
-  },
-  {
-    "Symbol": "FIS",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Transaction & Payment Processing Services"
-  },
-  {
-    "Symbol": "FITB",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Regional Banks"
-  },
-  {
-    "Symbol": "FSLR",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
-  },
-  {
-    "Symbol": "FE",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Electric Utilities"
-  },
-  {
-    "Symbol": "FISV",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Transaction & Payment Processing Services"
-  },
-  {
-    "Symbol": "F",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Automobile Manufacturers"
-  },
-  {
-    "Symbol": "FTNT",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Systems Software"
-  },
-  {
-    "Symbol": "FTV",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Industrial Machinery & Supplies & Components"
-  },
-  {
-    "Symbol": "FOXA",
-    "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Broadcasting"
-  },
-  {
-    "Symbol": "FOX",
-    "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Broadcasting"
-  },
-  {
-    "Symbol": "BEN",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Asset Management & Custody Banks"
-  },
-  {
-    "Symbol": "FCX",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Copper"
-  },
-  {
-    "Symbol": "GRMN",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Consumer Electronics"
-  },
-  {
-    "Symbol": "IT",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "IT Consulting & Other Services"
-  },
-  {
-    "Symbol": "GE",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Aerospace & Defense"
-  },
-  {
-    "Symbol": "GEHC",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Equipment"
-  },
-  {
-    "Symbol": "GEV",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Heavy Electrical Equipment"
-  },
-  {
-    "Symbol": "GEN",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Systems Software"
-  },
-  {
-    "Symbol": "GNRC",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Electrical Components & Equipment"
-  },
-  {
-    "Symbol": "GD",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Aerospace & Defense"
-  },
-  {
-    "Symbol": "GIS",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Packaged Foods & Meats"
-  },
-  {
-    "Symbol": "GM",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Automobile Manufacturers"
-  },
-  {
-    "Symbol": "GPC",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Distributors"
-  },
-  {
-    "Symbol": "GILD",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Biotechnology"
-  },
-  {
-    "Symbol": "GPN",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Transaction & Payment Processing Services"
-  },
-  {
-    "Symbol": "GL",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Life & Health Insurance"
-  },
-  {
-    "Symbol": "GDDY",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Internet Services & Infrastructure"
-  },
-  {
-    "Symbol": "GS",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Investment Banking & Brokerage"
-  },
-  {
-    "Symbol": "HAL",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Equipment & Services"
-  },
-  {
-    "Symbol": "HIG",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Property & Casualty Insurance"
-  },
-  {
-    "Symbol": "HAS",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Leisure Products"
-  },
-  {
-    "Symbol": "HCA",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Facilities"
-  },
-  {
-    "Symbol": "DOC",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Health Care REITs"
-  },
-  {
-    "Symbol": "HSIC",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Distributors"
-  },
-  {
-    "Symbol": "HSY",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Packaged Foods & Meats"
-  },
-  {
-    "Symbol": "HPE",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Technology Hardware, Storage & Peripherals"
-  },
-  {
-    "Symbol": "HLT",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Hotels, Resorts & Cruise Lines"
-  },
-  {
-    "Symbol": "HD",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Home Improvement Retail"
-  },
-  {
-    "Symbol": "HON",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Industrial Conglomerates"
-  },
-  {
-    "Symbol": "HRL",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Packaged Foods & Meats"
-  },
-  {
-    "Symbol": "HST",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Hotel & Resort REITs"
-  },
-  {
-    "Symbol": "HWM",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Aerospace & Defense"
-  },
-  {
-    "Symbol": "HPQ",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Technology Hardware, Storage & Peripherals"
-  },
-  {
-    "Symbol": "HUBB",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Industrial Machinery & Supplies & Components"
-  },
-  {
-    "Symbol": "HUM",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Managed Health Care"
-  },
-  {
-    "Symbol": "HBAN",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Regional Banks"
-  },
-  {
-    "Symbol": "HII",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Aerospace & Defense"
-  },
-  {
-    "Symbol": "IBM",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "IT Consulting & Other Services"
-  },
-  {
-    "Symbol": "IEX",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Industrial Machinery & Supplies & Components"
-  },
-  {
-    "Symbol": "IDXX",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Equipment"
-  },
-  {
-    "Symbol": "ITW",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Industrial Machinery & Supplies & Components"
-  },
-  {
-    "Symbol": "INCY",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Biotechnology"
-  },
-  {
-    "Symbol": "IR",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Industrial Machinery & Supplies & Components"
-  },
-  {
-    "Symbol": "PODD",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Equipment"
-  },
-  {
-    "Symbol": "INTC",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
-  },
-  {
-    "Symbol": "IBKR",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Investment Banking & Brokerage"
-  },
-  {
-    "Symbol": "ICE",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Financial Exchanges & Data"
-  },
-  {
-    "Symbol": "IFF",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Specialty Chemicals"
-  },
-  {
-    "Symbol": "IP",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Paper & Plastic Packaging Products & Materials"
-  },
-  {
-    "Symbol": "INTU",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Application Software"
-  },
-  {
-    "Symbol": "ISRG",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Equipment"
-  },
-  {
-    "Symbol": "IVZ",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Asset Management & Custody Banks"
-  },
-  {
-    "Symbol": "INVH",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Single-Family Residential REITs"
-  },
-  {
-    "Symbol": "IQV",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Life Sciences Tools & Services"
-  },
-  {
-    "Symbol": "IRM",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Other Specialized REITs"
-  },
-  {
-    "Symbol": "JBHT",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Cargo Ground Transportation"
-  },
-  {
-    "Symbol": "JBL",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Electronic Manufacturing Services"
-  },
-  {
-    "Symbol": "JKHY",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Transaction & Payment Processing Services"
-  },
-  {
-    "Symbol": "J",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Construction & Engineering"
-  },
-  {
-    "Symbol": "JNJ",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Pharmaceuticals"
-  },
-  {
-    "Symbol": "JCI",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Building Products"
-  },
-  {
-    "Symbol": "JPM",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Diversified Banks"
-  },
-  {
-    "Symbol": "KVUE",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Personal Care Products"
-  },
-  {
-    "Symbol": "KDP",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Soft Drinks & Non-alcoholic Beverages"
-  },
-  {
-    "Symbol": "KEY",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Regional Banks"
-  },
-  {
-    "Symbol": "KEYS",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Electronic Equipment & Instruments"
-  },
-  {
-    "Symbol": "KMB",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Household Products"
-  },
-  {
-    "Symbol": "KIM",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Retail REITs"
-  },
-  {
-    "Symbol": "KMI",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Storage & Transportation"
-  },
-  {
-    "Symbol": "KKR",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Asset Management & Custody Banks"
-  },
-  {
-    "Symbol": "KLAC",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductor Materials & Equipment"
-  },
-  {
-    "Symbol": "KHC",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Packaged Foods & Meats"
-  },
-  {
-    "Symbol": "KR",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Food Retail"
-  },
-  {
-    "Symbol": "LHX",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Aerospace & Defense"
-  },
-  {
-    "Symbol": "LH",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Services"
-  },
-  {
-    "Symbol": "LRCX",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductor Materials & Equipment"
-  },
-  {
-    "Symbol": "LVS",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Casinos & Gaming"
-  },
-  {
-    "Symbol": "LDOS",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Diversified Support Services"
-  },
-  {
-    "Symbol": "LEN",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Homebuilding"
-  },
-  {
-    "Symbol": "LII",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Building Products"
-  },
-  {
-    "Symbol": "LLY",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Pharmaceuticals"
-  },
-  {
-    "Symbol": "LIN",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Industrial Gases"
-  },
-  {
-    "Symbol": "LYV",
-    "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Movies & Entertainment"
-  },
-  {
-    "Symbol": "LMT",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Aerospace & Defense"
-  },
-  {
-    "Symbol": "L",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Multi-line Insurance"
-  },
-  {
-    "Symbol": "LOW",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Home Improvement Retail"
-  },
-  {
-    "Symbol": "LULU",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Apparel, Accessories & Luxury Goods"
-  },
-  {
-    "Symbol": "LITE",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Communications Equipment"
-  },
-  {
-    "Symbol": "LYB",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Specialty Chemicals"
-  },
-  {
-    "Symbol": "MTB",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Regional Banks"
-  },
-  {
-    "Symbol": "MPC",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Refining & Marketing"
-  },
-  {
-    "Symbol": "MAR",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Hotels, Resorts & Cruise Lines"
-  },
-  {
-    "Symbol": "MRSH",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Insurance Brokers"
-  },
-  {
-    "Symbol": "MLM",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Construction Materials"
-  },
-  {
-    "Symbol": "MAS",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Building Products"
-  },
-  {
-    "Symbol": "MA",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Transaction & Payment Processing Services"
-  },
-  {
-    "Symbol": "MKC",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Packaged Foods & Meats"
-  },
-  {
-    "Symbol": "MCD",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Restaurants"
-  },
-  {
-    "Symbol": "MCK",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Distributors"
-  },
-  {
-    "Symbol": "MDT",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Equipment"
-  },
-  {
-    "Symbol": "MRK",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Pharmaceuticals"
-  },
-  {
-    "Symbol": "META",
-    "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Interactive Media & Services"
-  },
-  {
-    "Symbol": "MET",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Life & Health Insurance"
-  },
-  {
-    "Symbol": "MTD",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Life Sciences Tools & Services"
-  },
-  {
-    "Symbol": "MGM",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Casinos & Gaming"
-  },
-  {
-    "Symbol": "MCHP",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
-  },
-  {
-    "Symbol": "MU",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
   },
   {
     "Symbol": "MSFT",
@@ -1585,184 +10,64 @@
     "GICS Sub-Industry": "Systems Software"
   },
   {
-    "Symbol": "MAA",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Multi-Family Residential REITs"
-  },
-  {
-    "Symbol": "MRNA",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Biotechnology"
-  },
-  {
-    "Symbol": "TAP",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Brewers"
-  },
-  {
-    "Symbol": "MDLZ",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Packaged Foods & Meats"
-  },
-  {
-    "Symbol": "MPWR",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
-  },
-  {
-    "Symbol": "MNST",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Soft Drinks & Non-alcoholic Beverages"
-  },
-  {
-    "Symbol": "MCO",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Financial Exchanges & Data"
-  },
-  {
-    "Symbol": "MS",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Investment Banking & Brokerage"
-  },
-  {
-    "Symbol": "MOS",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Fertilizers & Agricultural Chemicals"
-  },
-  {
-    "Symbol": "MSI",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Communications Equipment"
-  },
-  {
-    "Symbol": "MSCI",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Financial Exchanges & Data"
-  },
-  {
-    "Symbol": "NDAQ",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Financial Exchanges & Data"
-  },
-  {
-    "Symbol": "NTAP",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Technology Hardware, Storage & Peripherals"
-  },
-  {
-    "Symbol": "NFLX",
-    "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Movies & Entertainment"
-  },
-  {
-    "Symbol": "NEM",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Gold"
-  },
-  {
-    "Symbol": "NWSA",
-    "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Publishing"
-  },
-  {
-    "Symbol": "NWS",
-    "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Publishing"
-  },
-  {
-    "Symbol": "NEE",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Multi-Utilities"
-  },
-  {
-    "Symbol": "NKE",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Apparel, Accessories & Luxury Goods"
-  },
-  {
-    "Symbol": "NI",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Multi-Utilities"
-  },
-  {
-    "Symbol": "NDSN",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Industrial Machinery & Supplies & Components"
-  },
-  {
-    "Symbol": "NSC",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Rail Transportation"
-  },
-  {
-    "Symbol": "NTRS",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Asset Management & Custody Banks"
-  },
-  {
-    "Symbol": "NOC",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Aerospace & Defense"
-  },
-  {
-    "Symbol": "NCLH",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Hotels, Resorts & Cruise Lines"
-  },
-  {
-    "Symbol": "NRG",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Independent Power Producers & Energy Traders"
-  },
-  {
-    "Symbol": "NUE",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Steel"
-  },
-  {
     "Symbol": "NVDA",
     "GICS Sector": "Information Technology",
     "GICS Sub-Industry": "Semiconductors"
   },
   {
-    "Symbol": "NVR",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Homebuilding"
-  },
-  {
-    "Symbol": "NXPI",
+    "Symbol": "AVGO",
     "GICS Sector": "Information Technology",
     "GICS Sub-Industry": "Semiconductors"
   },
   {
-    "Symbol": "ORLY",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Automotive Retail"
-  },
-  {
-    "Symbol": "OXY",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Exploration & Production"
-  },
-  {
-    "Symbol": "ODFL",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Cargo Ground Transportation"
-  },
-  {
-    "Symbol": "OMC",
-    "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Advertising"
-  },
-  {
-    "Symbol": "ON",
+    "Symbol": "AMD",
     "GICS Sector": "Information Technology",
     "GICS Sub-Industry": "Semiconductors"
   },
   {
-    "Symbol": "OKE",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Storage & Transportation"
+    "Symbol": "QCOM",
+    "GICS Sector": "Information Technology",
+    "GICS Sub-Industry": "Semiconductors"
+  },
+  {
+    "Symbol": "INTC",
+    "GICS Sector": "Information Technology",
+    "GICS Sub-Industry": "Semiconductors"
+  },
+  {
+    "Symbol": "TXN",
+    "GICS Sector": "Information Technology",
+    "GICS Sub-Industry": "Semiconductors"
+  },
+  {
+    "Symbol": "TSM",
+    "GICS Sector": "Information Technology",
+    "GICS Sub-Industry": "Semiconductors"
+  },
+  {
+    "Symbol": "ARM",
+    "GICS Sector": "Information Technology",
+    "GICS Sub-Industry": "Semiconductors"
+  },
+  {
+    "Symbol": "SMCI",
+    "GICS Sector": "Information Technology",
+    "GICS Sub-Industry": "Technology Hardware, Storage & Peripherals"
+  },
+  {
+    "Symbol": "MU",
+    "GICS Sector": "Information Technology",
+    "GICS Sub-Industry": "Semiconductors"
+  },
+  {
+    "Symbol": "ADBE",
+    "GICS Sector": "Information Technology",
+    "GICS Sub-Industry": "Application Software"
+  },
+  {
+    "Symbol": "CRM",
+    "GICS Sector": "Information Technology",
+    "GICS Sub-Industry": "Application Software"
   },
   {
     "Symbol": "ORCL",
@@ -1770,19 +75,14 @@
     "GICS Sub-Industry": "Application Software"
   },
   {
-    "Symbol": "OTIS",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Industrial Machinery & Supplies & Components"
+    "Symbol": "IBM",
+    "GICS Sector": "Information Technology",
+    "GICS Sub-Industry": "IT Consulting & Other Services"
   },
   {
-    "Symbol": "PCAR",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Construction Machinery & Heavy Transportation Equipment"
-  },
-  {
-    "Symbol": "PKG",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Paper & Plastic Packaging Products & Materials"
+    "Symbol": "NOW",
+    "GICS Sector": "Information Technology",
+    "GICS Sub-Industry": "Systems Software"
   },
   {
     "Symbol": "PLTR",
@@ -1795,619 +95,24 @@
     "GICS Sub-Industry": "Systems Software"
   },
   {
-    "Symbol": "PSKY",
+    "Symbol": "SNOW",
+    "GICS Sector": "Information Technology",
+    "GICS Sub-Industry": "Application Software"
+  },
+  {
+    "Symbol": "GOOGL",
+    "GICS Sector": "Communication Services",
+    "GICS Sub-Industry": "Interactive Media & Services"
+  },
+  {
+    "Symbol": "META",
+    "GICS Sector": "Communication Services",
+    "GICS Sub-Industry": "Interactive Media & Services"
+  },
+  {
+    "Symbol": "NFLX",
     "GICS Sector": "Communication Services",
     "GICS Sub-Industry": "Movies & Entertainment"
-  },
-  {
-    "Symbol": "PH",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Industrial Machinery & Supplies & Components"
-  },
-  {
-    "Symbol": "PAYX",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Human Resource & Employment Services"
-  },
-  {
-    "Symbol": "PYPL",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Transaction & Payment Processing Services"
-  },
-  {
-    "Symbol": "PNR",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Industrial Machinery & Supplies & Components"
-  },
-  {
-    "Symbol": "PEP",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Soft Drinks & Non-alcoholic Beverages"
-  },
-  {
-    "Symbol": "PFE",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Pharmaceuticals"
-  },
-  {
-    "Symbol": "PCG",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Multi-Utilities"
-  },
-  {
-    "Symbol": "PM",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Tobacco"
-  },
-  {
-    "Symbol": "PSX",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Refining & Marketing"
-  },
-  {
-    "Symbol": "PNW",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Multi-Utilities"
-  },
-  {
-    "Symbol": "PNC",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Diversified Banks"
-  },
-  {
-    "Symbol": "POOL",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Distributors"
-  },
-  {
-    "Symbol": "PPG",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Specialty Chemicals"
-  },
-  {
-    "Symbol": "PPL",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Electric Utilities"
-  },
-  {
-    "Symbol": "PFG",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Life & Health Insurance"
-  },
-  {
-    "Symbol": "PG",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Personal Care Products"
-  },
-  {
-    "Symbol": "PGR",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Property & Casualty Insurance"
-  },
-  {
-    "Symbol": "PLD",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Industrial REITs"
-  },
-  {
-    "Symbol": "PRU",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Life & Health Insurance"
-  },
-  {
-    "Symbol": "PEG",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Electric Utilities"
-  },
-  {
-    "Symbol": "PTC",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Application Software"
-  },
-  {
-    "Symbol": "PSA",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Self-Storage REITs"
-  },
-  {
-    "Symbol": "PHM",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Homebuilding"
-  },
-  {
-    "Symbol": "PWR",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Construction & Engineering"
-  },
-  {
-    "Symbol": "QCOM",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
-  },
-  {
-    "Symbol": "DGX",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Services"
-  },
-  {
-    "Symbol": "Q",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductor Materials & Equipment"
-  },
-  {
-    "Symbol": "RL",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Apparel, Accessories & Luxury Goods"
-  },
-  {
-    "Symbol": "RJF",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Investment Banking & Brokerage"
-  },
-  {
-    "Symbol": "RTX",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Aerospace & Defense"
-  },
-  {
-    "Symbol": "O",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Retail REITs"
-  },
-  {
-    "Symbol": "REG",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Retail REITs"
-  },
-  {
-    "Symbol": "REGN",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Biotechnology"
-  },
-  {
-    "Symbol": "RF",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Regional Banks"
-  },
-  {
-    "Symbol": "RSG",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Environmental & Facilities Services"
-  },
-  {
-    "Symbol": "RMD",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Equipment"
-  },
-  {
-    "Symbol": "RVTY",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Equipment"
-  },
-  {
-    "Symbol": "HOOD",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Investment Banking & Brokerage"
-  },
-  {
-    "Symbol": "ROK",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Electrical Components & Equipment"
-  },
-  {
-    "Symbol": "ROL",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Environmental & Facilities Services"
-  },
-  {
-    "Symbol": "ROP",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Electronic Equipment & Instruments"
-  },
-  {
-    "Symbol": "ROST",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Apparel Retail"
-  },
-  {
-    "Symbol": "RCL",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Hotels, Resorts & Cruise Lines"
-  },
-  {
-    "Symbol": "SPGI",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Financial Exchanges & Data"
-  },
-  {
-    "Symbol": "CRM",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Application Software"
-  },
-  {
-    "Symbol": "SNDK",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Technology Hardware, Storage & Peripherals"
-  },
-  {
-    "Symbol": "SBAC",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Telecom Tower REITs"
-  },
-  {
-    "Symbol": "SLB",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Equipment & Services"
-  },
-  {
-    "Symbol": "STX",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Technology Hardware, Storage & Peripherals"
-  },
-  {
-    "Symbol": "SRE",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Multi-Utilities"
-  },
-  {
-    "Symbol": "NOW",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Systems Software"
-  },
-  {
-    "Symbol": "SHW",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Specialty Chemicals"
-  },
-  {
-    "Symbol": "SPG",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Retail REITs"
-  },
-  {
-    "Symbol": "SWKS",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
-  },
-  {
-    "Symbol": "SJM",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Packaged Foods & Meats"
-  },
-  {
-    "Symbol": "SW",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Paper & Plastic Packaging Products & Materials"
-  },
-  {
-    "Symbol": "SNA",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Industrial Machinery & Supplies & Components"
-  },
-  {
-    "Symbol": "SOLV",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Technology"
-  },
-  {
-    "Symbol": "SO",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Electric Utilities"
-  },
-  {
-    "Symbol": "LUV",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Passenger Airlines"
-  },
-  {
-    "Symbol": "SWK",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Industrial Machinery & Supplies & Components"
-  },
-  {
-    "Symbol": "SBUX",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Restaurants"
-  },
-  {
-    "Symbol": "STT",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Asset Management & Custody Banks"
-  },
-  {
-    "Symbol": "STLD",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Steel"
-  },
-  {
-    "Symbol": "STE",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Equipment"
-  },
-  {
-    "Symbol": "SYK",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Equipment"
-  },
-  {
-    "Symbol": "SMCI",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Technology Hardware, Storage & Peripherals"
-  },
-  {
-    "Symbol": "SYF",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Consumer Finance"
-  },
-  {
-    "Symbol": "SNPS",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Application Software"
-  },
-  {
-    "Symbol": "SYY",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Food Distributors"
-  },
-  {
-    "Symbol": "TMUS",
-    "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Wireless Telecommunication Services"
-  },
-  {
-    "Symbol": "TROW",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Asset Management & Custody Banks"
-  },
-  {
-    "Symbol": "TTWO",
-    "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Interactive Home Entertainment"
-  },
-  {
-    "Symbol": "TPR",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Apparel, Accessories & Luxury Goods"
-  },
-  {
-    "Symbol": "TRGP",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Storage & Transportation"
-  },
-  {
-    "Symbol": "TGT",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Consumer Staples Merchandise Retail"
-  },
-  {
-    "Symbol": "TEL",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Electronic Manufacturing Services"
-  },
-  {
-    "Symbol": "TDY",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Electronic Equipment & Instruments"
-  },
-  {
-    "Symbol": "TER",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductor Materials & Equipment"
-  },
-  {
-    "Symbol": "TSLA",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Automobile Manufacturers"
-  },
-  {
-    "Symbol": "TXN",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
-  },
-  {
-    "Symbol": "TPL",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Exploration & Production"
-  },
-  {
-    "Symbol": "TXT",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Aerospace & Defense"
-  },
-  {
-    "Symbol": "TMO",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Life Sciences Tools & Services"
-  },
-  {
-    "Symbol": "TJX",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Apparel Retail"
-  },
-  {
-    "Symbol": "TKO",
-    "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Movies & Entertainment"
-  },
-  {
-    "Symbol": "TTD",
-    "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Advertising"
-  },
-  {
-    "Symbol": "TSCO",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Other Specialty Retail"
-  },
-  {
-    "Symbol": "TT",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Building Products"
-  },
-  {
-    "Symbol": "TDG",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Aerospace & Defense"
-  },
-  {
-    "Symbol": "TRV",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Property & Casualty Insurance"
-  },
-  {
-    "Symbol": "TRMB",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Application Software"
-  },
-  {
-    "Symbol": "TFC",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Diversified Banks"
-  },
-  {
-    "Symbol": "TYL",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Application Software"
-  },
-  {
-    "Symbol": "TSN",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Packaged Foods & Meats"
-  },
-  {
-    "Symbol": "USB",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Diversified Banks"
-  },
-  {
-    "Symbol": "UBER",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Passenger Ground Transportation"
-  },
-  {
-    "Symbol": "UDR",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Multi-Family Residential REITs"
-  },
-  {
-    "Symbol": "ULTA",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Other Specialty Retail"
-  },
-  {
-    "Symbol": "UNP",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Rail Transportation"
-  },
-  {
-    "Symbol": "UAL",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Passenger Airlines"
-  },
-  {
-    "Symbol": "UPS",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Air Freight & Logistics"
-  },
-  {
-    "Symbol": "URI",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Trading Companies & Distributors"
-  },
-  {
-    "Symbol": "UNH",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Managed Health Care"
-  },
-  {
-    "Symbol": "UHS",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Facilities"
-  },
-  {
-    "Symbol": "VLO",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Refining & Marketing"
-  },
-  {
-    "Symbol": "VTR",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Health Care REITs"
-  },
-  {
-    "Symbol": "VLTO",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Environmental & Facilities Services"
-  },
-  {
-    "Symbol": "VRSN",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Internet Services & Infrastructure"
-  },
-  {
-    "Symbol": "VRSK",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Research & Consulting Services"
-  },
-  {
-    "Symbol": "VZ",
-    "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Integrated Telecommunication Services"
-  },
-  {
-    "Symbol": "VRTX",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Biotechnology"
-  },
-  {
-    "Symbol": "VRT",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Electrical Components & Equipment"
-  },
-  {
-    "Symbol": "VTRS",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Pharmaceuticals"
-  },
-  {
-    "Symbol": "VICI",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Hotel & Resort REITs"
-  },
-  {
-    "Symbol": "V",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Transaction & Payment Processing Services"
-  },
-  {
-    "Symbol": "VST",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Electric Utilities"
-  },
-  {
-    "Symbol": "VMC",
-    "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Construction Materials"
-  },
-  {
-    "Symbol": "WRB",
-    "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Property & Casualty Insurance"
-  },
-  {
-    "Symbol": "GWW",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Industrial Machinery & Supplies & Components"
-  },
-  {
-    "Symbol": "WAB",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Construction Machinery & Heavy Transportation Equipment"
-  },
-  {
-    "Symbol": "WMT",
-    "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Consumer Staples Merchandise Retail"
   },
   {
     "Symbol": "DIS",
@@ -2415,24 +120,194 @@
     "GICS Sub-Industry": "Movies & Entertainment"
   },
   {
-    "Symbol": "WBD",
+    "Symbol": "CMCSA",
     "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Broadcasting"
+    "GICS Sub-Industry": "Cable & Satellite"
   },
   {
-    "Symbol": "WM",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Environmental & Facilities Services"
+    "Symbol": "T",
+    "GICS Sector": "Communication Services",
+    "GICS Sub-Industry": "Integrated Telecommunication Services"
   },
   {
-    "Symbol": "WAT",
+    "Symbol": "VZ",
+    "GICS Sector": "Communication Services",
+    "GICS Sub-Industry": "Integrated Telecommunication Services"
+  },
+  {
+    "Symbol": "AMZN",
+    "GICS Sector": "Consumer Discretionary",
+    "GICS Sub-Industry": "Broadline Retail"
+  },
+  {
+    "Symbol": "TSLA",
+    "GICS Sector": "Consumer Discretionary",
+    "GICS Sub-Industry": "Automobile Manufacturers"
+  },
+  {
+    "Symbol": "HD",
+    "GICS Sector": "Consumer Discretionary",
+    "GICS Sub-Industry": "Home Improvement Retail"
+  },
+  {
+    "Symbol": "NKE",
+    "GICS Sector": "Consumer Discretionary",
+    "GICS Sub-Industry": "Footwear"
+  },
+  {
+    "Symbol": "MCD",
+    "GICS Sector": "Consumer Discretionary",
+    "GICS Sub-Industry": "Restaurants"
+  },
+  {
+    "Symbol": "SBUX",
+    "GICS Sector": "Consumer Discretionary",
+    "GICS Sub-Industry": "Restaurants"
+  },
+  {
+    "Symbol": "BKNG",
+    "GICS Sector": "Consumer Discretionary",
+    "GICS Sub-Industry": "Hotels, Resorts & Cruise Lines"
+  },
+  {
+    "Symbol": "TJX",
+    "GICS Sector": "Consumer Discretionary",
+    "GICS Sub-Industry": "Apparel Retail"
+  },
+  {
+    "Symbol": "LOW",
+    "GICS Sector": "Consumer Discretionary",
+    "GICS Sub-Industry": "Home Improvement Retail"
+  },
+  {
+    "Symbol": "UBER",
+    "GICS Sector": "Consumer Discretionary",
+    "GICS Sub-Industry": "Passenger Ground Transportation"
+  },
+  {
+    "Symbol": "LULU",
+    "GICS Sector": "Consumer Discretionary",
+    "GICS Sub-Industry": "Apparel, Accessories & Luxury Goods"
+  },
+  {
+    "Symbol": "ABNB",
+    "GICS Sector": "Consumer Discretionary",
+    "GICS Sub-Industry": "Hotels, Resorts & Cruise Lines"
+  },
+  {
+    "Symbol": "PG",
+    "GICS Sector": "Consumer Staples",
+    "GICS Sub-Industry": "Household Products"
+  },
+  {
+    "Symbol": "KO",
+    "GICS Sector": "Consumer Staples",
+    "GICS Sub-Industry": "Soft Drinks"
+  },
+  {
+    "Symbol": "PEP",
+    "GICS Sector": "Consumer Staples",
+    "GICS Sub-Industry": "Soft Drinks"
+  },
+  {
+    "Symbol": "COST",
+    "GICS Sector": "Consumer Staples",
+    "GICS Sub-Industry": "Hypermarkets & Super Centers"
+  },
+  {
+    "Symbol": "WMT",
+    "GICS Sector": "Consumer Staples",
+    "GICS Sub-Industry": "Hypermarkets & Super Centers"
+  },
+  {
+    "Symbol": "PM",
+    "GICS Sector": "Consumer Staples",
+    "GICS Sub-Industry": "Tobacco"
+  },
+  {
+    "Symbol": "MDLZ",
+    "GICS Sector": "Consumer Staples",
+    "GICS Sub-Industry": "Packaged Foods & Meats"
+  },
+  {
+    "Symbol": "MO",
+    "GICS Sector": "Consumer Staples",
+    "GICS Sub-Industry": "Tobacco"
+  },
+  {
+    "Symbol": "LLY",
+    "GICS Sector": "Health Care",
+    "GICS Sub-Industry": "Pharmaceuticals"
+  },
+  {
+    "Symbol": "NVO",
+    "GICS Sector": "Health Care",
+    "GICS Sub-Industry": "Pharmaceuticals"
+  },
+  {
+    "Symbol": "AZN",
+    "GICS Sector": "Health Care",
+    "GICS Sub-Industry": "Pharmaceuticals"
+  },
+  {
+    "Symbol": "UNH",
+    "GICS Sector": "Health Care",
+    "GICS Sub-Industry": "Managed Health Care"
+  },
+  {
+    "Symbol": "JNJ",
+    "GICS Sector": "Health Care",
+    "GICS Sub-Industry": "Pharmaceuticals"
+  },
+  {
+    "Symbol": "MRK",
+    "GICS Sector": "Health Care",
+    "GICS Sub-Industry": "Pharmaceuticals"
+  },
+  {
+    "Symbol": "ABBV",
+    "GICS Sector": "Health Care",
+    "GICS Sub-Industry": "Biotechnology"
+  },
+  {
+    "Symbol": "PFE",
+    "GICS Sector": "Health Care",
+    "GICS Sub-Industry": "Pharmaceuticals"
+  },
+  {
+    "Symbol": "AMGN",
+    "GICS Sector": "Health Care",
+    "GICS Sub-Industry": "Biotechnology"
+  },
+  {
+    "Symbol": "DHR",
     "GICS Sector": "Health Care",
     "GICS Sub-Industry": "Life Sciences Tools & Services"
   },
   {
-    "Symbol": "WEC",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Electric Utilities"
+    "Symbol": "ISRG",
+    "GICS Sector": "Health Care",
+    "GICS Sub-Industry": "Health Care Equipment"
+  },
+  {
+    "Symbol": "BIIB",
+    "GICS Sector": "Health Care",
+    "GICS Sub-Industry": "Biotechnology"
+  },
+  {
+    "Symbol": "REGN",
+    "GICS Sector": "Health Care",
+    "GICS Sub-Industry": "Biotechnology"
+  },
+  {
+    "Symbol": "JPM",
+    "GICS Sector": "Financials",
+    "GICS Sub-Industry": "Diversified Banks"
+  },
+  {
+    "Symbol": "BAC",
+    "GICS Sector": "Financials",
+    "GICS Sub-Industry": "Diversified Banks"
   },
   {
     "Symbol": "WFC",
@@ -2440,88 +315,193 @@
     "GICS Sub-Industry": "Diversified Banks"
   },
   {
-    "Symbol": "WELL",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Health Care REITs"
-  },
-  {
-    "Symbol": "WST",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Supplies"
-  },
-  {
-    "Symbol": "WDC",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Technology Hardware, Storage & Peripherals"
-  },
-  {
-    "Symbol": "WY",
-    "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Timber REITs"
-  },
-  {
-    "Symbol": "WSM",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Homefurnishing Retail"
-  },
-  {
-    "Symbol": "WMB",
-    "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Storage & Transportation"
-  },
-  {
-    "Symbol": "WTW",
+    "Symbol": "MS",
     "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Insurance Brokers"
+    "GICS Sub-Industry": "Investment Banking & Brokerage"
   },
   {
-    "Symbol": "WDAY",
+    "Symbol": "GS",
+    "GICS Sector": "Financials",
+    "GICS Sub-Industry": "Investment Banking & Brokerage"
+  },
+  {
+    "Symbol": "C",
+    "GICS Sector": "Financials",
+    "GICS Sub-Industry": "Diversified Banks"
+  },
+  {
+    "Symbol": "BRK.B",
+    "GICS Sector": "Financials",
+    "GICS Sub-Industry": "Multi-Sector Holdings"
+  },
+  {
+    "Symbol": "V",
+    "GICS Sector": "Financials",
+    "GICS Sub-Industry": "Transaction & Payment Processing Services"
+  },
+  {
+    "Symbol": "MA",
+    "GICS Sector": "Financials",
+    "GICS Sub-Industry": "Transaction & Payment Processing Services"
+  },
+  {
+    "Symbol": "BLK",
+    "GICS Sector": "Financials",
+    "GICS Sub-Industry": "Asset Management & Custody Banks"
+  },
+  {
+    "Symbol": "BX",
+    "GICS Sector": "Financials",
+    "GICS Sub-Industry": "Asset Management & Custody Banks"
+  },
+  {
+    "Symbol": "SCHW",
+    "GICS Sector": "Financials",
+    "GICS Sub-Industry": "Investment Banking & Brokerage"
+  },
+  {
+    "Symbol": "AXP",
+    "GICS Sector": "Financials",
+    "GICS Sub-Industry": "Consumer Finance"
+  },
+  {
+    "Symbol": "CAT",
+    "GICS Sector": "Industrials",
+    "GICS Sub-Industry": "Construction Machinery & Heavy Transportation Equipment"
+  },
+  {
+    "Symbol": "GE",
+    "GICS Sector": "Industrials",
+    "GICS Sub-Industry": "Aerospace & Defense"
+  },
+  {
+    "Symbol": "HON",
+    "GICS Sector": "Industrials",
+    "GICS Sub-Industry": "Industrial Conglomerates"
+  },
+  {
+    "Symbol": "UNP",
+    "GICS Sector": "Industrials",
+    "GICS Sub-Industry": "Rail Transportation"
+  },
+  {
+    "Symbol": "UPS",
+    "GICS Sector": "Industrials",
+    "GICS Sub-Industry": "Air Freight & Logistics"
+  },
+  {
+    "Symbol": "BA",
+    "GICS Sector": "Industrials",
+    "GICS Sub-Industry": "Aerospace & Defense"
+  },
+  {
+    "Symbol": "LMT",
+    "GICS Sector": "Industrials",
+    "GICS Sub-Industry": "Aerospace & Defense"
+  },
+  {
+    "Symbol": "RTX",
+    "GICS Sector": "Industrials",
+    "GICS Sub-Industry": "Aerospace & Defense"
+  },
+  {
+    "Symbol": "DE",
+    "GICS Sector": "Industrials",
+    "GICS Sub-Industry": "Agricultural & Farm Machinery"
+  },
+  {
+    "Symbol": "XOM",
+    "GICS Sector": "Energy",
+    "GICS Sub-Industry": "Integrated Oil & Gas"
+  },
+  {
+    "Symbol": "CVX",
+    "GICS Sector": "Energy",
+    "GICS Sub-Industry": "Integrated Oil & Gas"
+  },
+  {
+    "Symbol": "COP",
+    "GICS Sector": "Energy",
+    "GICS Sub-Industry": "Oil & Gas Exploration & Production"
+  },
+  {
+    "Symbol": "SLB",
+    "GICS Sector": "Energy",
+    "GICS Sub-Industry": "Oil & Gas Equipment & Services"
+  },
+  {
+    "Symbol": "NEE",
+    "GICS Sector": "Utilities",
+    "GICS Sub-Industry": "Electric Utilities"
+  },
+  {
+    "Symbol": "SO",
+    "GICS Sector": "Utilities",
+    "GICS Sub-Industry": "Electric Utilities"
+  },
+  {
+    "Symbol": "DUK",
+    "GICS Sector": "Utilities",
+    "GICS Sub-Industry": "Electric Utilities"
+  },
+  {
+    "Symbol": "CEG",
+    "GICS Sector": "Utilities",
+    "GICS Sub-Industry": "Electric Utilities"
+  },
+  {
+    "Symbol": "PLD",
+    "GICS Sector": "Real Estate",
+    "GICS Sub-Industry": "Industrial REITs"
+  },
+  {
+    "Symbol": "AMT",
+    "GICS Sector": "Real Estate",
+    "GICS Sub-Industry": "Telecom Tower REITs"
+  },
+  {
+    "Symbol": "EQIX",
+    "GICS Sector": "Real Estate",
+    "GICS Sub-Industry": "Data Center REITs"
+  },
+  {
+    "Symbol": "LIN",
+    "GICS Sector": "Materials",
+    "GICS Sub-Industry": "Industrial Gases"
+  },
+  {
+    "Symbol": "APD",
+    "GICS Sector": "Materials",
+    "GICS Sub-Industry": "Industrial Gases"
+  },
+  {
+    "Symbol": "SHW",
+    "GICS Sector": "Materials",
+    "GICS Sub-Industry": "Specialty Chemicals"
+  },
+  {
+    "Symbol": "FCX",
+    "GICS Sector": "Materials",
+    "GICS Sub-Industry": "Copper"
+  },
+  {
+    "Symbol": "ALB",
+    "GICS Sector": "Materials",
+    "GICS Sub-Industry": "Specialty Chemicals"
+  },
+  {
+    "Symbol": "HOOD",
+    "GICS Sector": "Financials",
+    "GICS Sub-Industry": "Investment Banking & Brokerage"
+  },
+  {
+    "Symbol": "COIN",
+    "GICS Sector": "Financials",
+    "GICS Sub-Industry": "Financial Exchanges & Data"
+  },
+  {
+    "Symbol": "MSTR",
     "GICS Sector": "Information Technology",
     "GICS Sub-Industry": "Application Software"
-  },
-  {
-    "Symbol": "WYNN",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Casinos & Gaming"
-  },
-  {
-    "Symbol": "XEL",
-    "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Multi-Utilities"
-  },
-  {
-    "Symbol": "XYL",
-    "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Industrial Machinery & Supplies & Components"
-  },
-  {
-    "Symbol": "YUM",
-    "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Restaurants"
-  },
-  {
-    "Symbol": "ZBRA",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Electronic Equipment & Instruments"
-  },
-  {
-    "Symbol": "ZBH",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Equipment"
-  },
-  {
-    "Symbol": "ZTS",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Pharmaceuticals"
-  },
-  {
-    "Symbol": "TSM",
-    "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
-  },
-  {
-    "Symbol": "NVO",
-    "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Pharmaceuticals"
   }
 ]
