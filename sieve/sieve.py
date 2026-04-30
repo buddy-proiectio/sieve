@@ -89,7 +89,15 @@ def get_headers() -> dict:
 
 # Target Keywords Dictionary
 TARGET_KEYWORDS: Dict[str, List[str]] = {
-    "Macro": ["FOMC", "CPI", "Fed", "Interest rate"],
+    "Macro": [
+        "FOMC",
+        "CPI",
+        "Fed",
+        "Interest rate",
+        "Inflation",
+        "PCE",
+        "Unemployment",
+    ],
     "Crypto": ["Bitcoin", "Ethereum", "Crypto"],
     "US Core Tech": [
         "Tesla",
@@ -101,25 +109,85 @@ TARGET_KEYWORDS: Dict[str, List[str]] = {
         "Microsoft",
         "Meta",
         "OpenAI",
-        "TSMC",
         "Intel",
         "Google",
         "Alphabet",
     ],
-    "Future Tech/Others": [
-        "Eli Lilly",
-        "Novo Nordisk",
-        "SpaceX",
-        "NASA",
+    "Semiconductors": [
+        "Semiconductor",
+        "Foundry",
+        "Qualcomm",
+        "ARM",
+        "ASML",
         "Broadcom",
         "Micron",
-        "Walmart",
-        "Oracle",
-        "Netflix",
+        "SK Hynix",
+        "Samsung",
+        "TSMC",
         "AMD",
-        "Robinhood",
-        "ExxonMobil",
+        "GPU",
+        "NPU",
+    ],
+    "AI & Cloud": [
+        "LLM",
+        "Generative AI",
+        "AGI",
+        "Data Center",
+        "Cloud Computing",
+        "Oracle",
+        "AWS",
+    ],
+    "Bio & Healthcare": [
+        "Eli Lilly",
+        "Novo Nordisk",
+        "GLP-1",
+        "Clinical trial",
         "FDA",
+        "Obesity",
+    ],
+    "Robotics": [
+        "Boston Dynamics",
+        "Figure AI",
+        "Agility Robotics",
+        "Optimus",
+    ],
+    "Defense": [
+        "Anduril",
+        "Lockheed Martin",
+        "Raytheon",
+        "Northrop Grumman",
+        "General Dynamics",
+    ],
+    "Future Tech": [
+        "SpaceX",
+        "NASA",
+        "EV",
+        "Autonomous driving",
+        "Robotaxi",
+        "Nuclear",
+        "SMR",
+        "Battery",
+        "Quantum computing",
+        "Starlink",
+        "Neuralink",
+        "Smart glasses",
+        "Spatial computing",
+        "Vision Pro",
+        "BCI",
+    ],
+    "Others": [
+        "ExxonMobil",
+        "Walmart",
+        "Nike",
+        "Starbucks",
+        "McDonald's",
+        "Coca-Cola",
+        "PepsiCo",
+        "Visa",
+        "Mastercard",
+        "Robinhood",
+        "Netflix",
+        "Disney",
     ],
     "Commodities": ["Gold", "Silver"],
 }
@@ -132,9 +200,7 @@ TARGET_TICKERS = [
     "AMZN",
     "MSFT",
     "META",
-    "AVGO",
     "MU",
-    "WMT",
     "ORCL",
     "NFLX",
     "AMD",
@@ -144,7 +210,6 @@ TARGET_TICKERS = [
     "INTC",
     "GOOG",
     "HOOD",
-    "XOM",
 ]
 
 X_GURUS = [
@@ -214,10 +279,16 @@ seen_urls: Set[str] = set()
 def generate_dynamic_rss_feeds() -> Dict[str, str]:
     feeds = dict(STATIC_RSS_FEEDS)
 
-    # 1. SEC EDGAR feeds (8-K) per ticker
+    # 1. SEC EDGAR feeds (8-K, 10-K, 10-Q) per ticker
     for t in TARGET_TICKERS:
         feeds[f"SEC EDGAR {t} 8-K"] = (
             f"https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK={t}&type=8-K&output=atom"
+        )
+        feeds[f"SEC EDGAR {t} 10-K"] = (
+            f"https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK={t}&type=10-K&output=atom"
+        )
+        feeds[f"SEC EDGAR {t} 10-Q"] = (
+            f"https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK={t}&type=10-Q&output=atom"
         )
 
     # 2. Yahoo Finance Combined Tickers
@@ -401,20 +472,36 @@ def process_rss_feed(feed_name: str, feed_url: str) -> None:
             if feed_name.startswith("X, @"):
                 first_sentence = re.split(r"(?<=[.!?])\s+|\n", title)[0].strip()
                 title = f"{first_sentence} ({feed_name})"
+            elif feed_name.startswith("SEC EDGAR"):
+                ticker = feed_name.split()[2]
+                if " - " in title:
+                    form_type = title.split(" - ")[0].strip()
+                    title = f"{ticker} {form_type}"
+                else:
+                    title = f"{ticker} SEC Filing"
 
             summary_html = entry.get("summary", "") or entry.get("description", "")
             summary = strip_html_tags(summary_html)
 
-            # TASK 1: Deep Text Extraction
-            full_content, extraction_status = fetch_full_content(url, feed_name, title)
+            is_sec_feed = feed_name.startswith("SEC EDGAR")
 
-            # If extraction failed, fallback to the rss summary
-            if extraction_status == "fallback_used" or not full_content:
-                full_content = summary
-                extraction_status = "fallback_used"
+            if is_sec_feed:
+                full_content = ""
+                extraction_status = "sec_filing"
+                matched_keywords = [feed_name.split()[2]]
+            else:
+                # TASK 1: Deep Text Extraction
+                full_content, extraction_status = fetch_full_content(
+                    url, feed_name, title
+                )
 
-            text_to_search = f"{title} | {full_content}"
-            matched_keywords = find_keywords(text_to_search)
+                # If extraction failed, fallback to the rss summary
+                if extraction_status == "fallback_used" or not full_content:
+                    full_content = summary
+                    extraction_status = "fallback_used"
+
+                text_to_search = f"{title} | {full_content}"
+                matched_keywords = find_keywords(text_to_search)
 
             if matched_keywords:
                 # Semantic Duplication Check BEFORE cache insertion
