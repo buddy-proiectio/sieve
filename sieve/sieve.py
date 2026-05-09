@@ -6,7 +6,7 @@ It applies strict Regex/Keyword filtering based on a predefined dictionary and
 saves matched results to a daily rolling JSON file using the local timezone.
 
 Supported Sources:
-1. SEC EDGAR 8-K for specified tickers (RSS)
+1. SEC EDGAR 8-K, 10-K, 10-Q for specified tickers (RSS)
 2. Yahoo Finance (General & Multi-ticker RSS)
 3. CNBC Tech (RSS)
 4. TechCrunch AI (RSS)
@@ -29,6 +29,7 @@ Supported Sources:
 
 import sys
 import os
+import json
 import re
 import logging
 import schedule
@@ -192,43 +193,76 @@ TARGET_KEYWORDS: Dict[str, List[str]] = {
     "Commodities": ["Gold", "Silver"],
 }
 
-TARGET_TICKERS = [
-    "TSLA",
-    "NVDA",
-    "PLTR",
-    "AAPL",
-    "AMZN",
-    "MSFT",
-    "META",
-    "MU",
-    "ORCL",
-    "NFLX",
-    "AMD",
-    "LLY",
-    "NVO",
-    "TSM",
-    "INTC",
-    "GOOG",
-    "HOOD",
-]
+# ==============================================================================
+# STATE & CACHE (IN-MEMORY & DISK FALLBACK)
+# ==============================================================================
+
+TEMP_CACHE_FILE = ".daily_cache_temp.json"
+
+
+def load_target_tickers() -> List[str]:
+    """Loads tickers from the shared JSON file."""
+    try:
+        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        json_path = os.path.join(project_root, "shared", "market_map_targets.json")
+        with open(json_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            return list(set(item["Symbol"] for item in data))
+    except Exception as e:
+        logger.error(f"Failed to load market_map_targets.json: {e}")
+        return ["TSLA", "NVDA", "GOOGL", "AAPL", "AMZN", "MSFT", "META"]
+
+
+TARGET_TICKERS = load_target_tickers()
+daily_articles_cache: List[dict] = []
+seen_urls: Set[str] = set()
+
+# Cap the in-memory cache to save RAM on 1GB instances.
+MAX_IN_MEMORY_ARTICLES = 100
+
+
+def flush_cache_to_disk():
+    """Appends current cache to a temporary file and clears memory."""
+    global daily_articles_cache
+    if len(daily_articles_cache) < MAX_IN_MEMORY_ARTICLES:
+        return
+
+    existing_data = []
+    if os.path.exists(TEMP_CACHE_FILE):
+        try:
+            with open(TEMP_CACHE_FILE, "r", encoding="utf-8") as f:
+                existing_data = json.load(f)
+        except:
+            existing_data = []
+
+    existing_data.extend(daily_articles_cache)
+
+    try:
+        with open(TEMP_CACHE_FILE, "w", encoding="utf-8") as f:
+            json.dump(existing_data, f, ensure_ascii=False)
+        daily_articles_cache.clear()
+        logger.info(f"Memory limit reached. Flushed articles to {TEMP_CACHE_FILE}")
+    except Exception as e:
+        logger.error(f"Failed to flush cache to disk: {e}")
+
 
 X_GURUS = [
     "BurryArchive",
     "NickTimiraos",
     "unusual_whales",
-    "KobeissiLetter",  # Macro
+    "KobeissiLetter",
     "elonmusk",
     "tim_cook",
     "satyanadella",
-    "shyamsankar",  # US Core Tech
+    "shyamsankar",
     "sama",
     "jackclarkSF",
-    "ylecun",  # AI
+    "ylecun",
     "EricTopol",
-    "PeterDiamandis",  # Future/Bio
+    "PeterDiamandis",
     "tier10k",
     "EricBalchunas",
-    "saylor",  # Crypto
+    "saylor",
 ]
 
 STATIC_RSS_FEEDS = {
@@ -263,13 +297,6 @@ KEYWORD_PATTERNS = {
     )
     for kw in ALL_KEYWORDS
 }
-
-# ==============================================================================
-# STATE & CACHE (IN-MEMORY)
-# ==============================================================================
-
-daily_articles_cache: List[dict] = []
-seen_urls: Set[str] = set()
 
 # ==============================================================================
 # DYNAMIC URL GENERATION
@@ -532,6 +559,7 @@ def process_rss_feed(feed_name: str, feed_url: str) -> None:
             logger.info(
                 f"Finished {feed_name}: Appended {new_matches_count} matches to cache."
             )
+            flush_cache_to_disk()
 
     except Exception as e:
         logger.debug(f"Notice: Failed to process RSS {feed_name} ({feed_url}): {e}")
@@ -539,12 +567,31 @@ def process_rss_feed(feed_name: str, feed_url: str) -> None:
 
 # ==============================================================================
 def trigger_daily_save():
+    """Merges memory and disk cache then triggers the final daily save."""
+    global daily_articles_cache
+
+    # Load from disk if exists
+    disk_data = []
+    if os.path.exists(TEMP_CACHE_FILE):
+        try:
+            with open(TEMP_CACHE_FILE, "r", encoding="utf-8") as f:
+                disk_data = json.load(f)
+            os.remove(TEMP_CACHE_FILE)
+            logger.info(f"Loaded {len(disk_data)} articles from temp disk cache.")
+        except Exception as e:
+            logger.error(f"Failed to read/remove temp cache file: {e}")
+
+    # Combine all
+    all_articles = disk_data + daily_articles_cache
+
     execute_daily_save_and_reset(
-        daily_articles_cache,
+        all_articles,
         seen_urls,
         TARGET_TICKERS,
         "d6dsu29r01qm89pkrqj0d6dsu29r01qm89pkrqjg",
     )
+
+    daily_articles_cache.clear()
 
 
 def the_sieve_job() -> None:
