@@ -54,7 +54,7 @@ def fetch_weekly_schedule(finnhub_api_key: str, target_tickers: list) -> dict:
 
     # Initialize dictionary keys with English formatting
     for d in dates_to_check:
-        day_str = f"{d.strftime('%b')} {d.day} ({weekdays[d.weekday()]})"
+        day_str = f\"{d.strftime('%d %b')} ({weekdays[d.weekday()]})\"
         schedule_dict[day_str] = []
 
     # --------------------------------------------------------------------------
@@ -64,7 +64,7 @@ def fetch_weekly_schedule(finnhub_api_key: str, target_tickers: list) -> dict:
     au_holidays = holidays.AU(years=[dates_to_check[0].year, dates_to_check[-1].year])
 
     for d in dates_to_check:
-        day_str = f"{d.strftime('%b')} {d.day} ({weekdays[d.weekday()]})"
+        day_str = f\"{d.strftime('%d %b')} ({weekdays[d.weekday()]})\"
         us_event = us_holidays.get(d)
         au_event = au_holidays.get(d)
 
@@ -132,7 +132,7 @@ def fetch_weekly_schedule(finnhub_api_key: str, target_tickers: list) -> dict:
                     # FF's XML date format is `m-d-Y`
                     event_date = datetime.strptime(date_str, "%m-%d-%Y").date()
                     if event_date in dates_to_check:
-                        day_str = f"{event_date.strftime('%b')} {event_date.day} ({weekdays[event_date.weekday()]})"
+                        day_str = f\"{event_date.strftime('%d %b')} ({weekdays[event_date.weekday()]})\"
                         formatted_event = f"{macro_prefix} {title}"
                         if formatted_event not in schedule_dict[day_str]:
                             schedule_dict[day_str].append(formatted_event)
@@ -161,7 +161,7 @@ def fetch_weekly_schedule(finnhub_api_key: str, target_tickers: list) -> dict:
                                     date_str, "%Y-%m-%d"
                                 ).date()
                                 if event_date in dates_to_check:
-                                    day_str = f"{event_date.strftime('%b')} {event_date.day} ({weekdays[event_date.weekday()]})"
+                                    day_str = f\"{event_date.strftime('%d %b')} ({weekdays[event_date.weekday()]})\"
                                     formatted_event = (
                                         f"★ [Earnings] {ticker} Earnings Call"
                                     )
