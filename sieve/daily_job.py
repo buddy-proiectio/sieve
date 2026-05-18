@@ -187,7 +187,7 @@ def execute_daily_save_and_reset(
     finnhub_api_key: str,
 ) -> None:
     """
-    Triggered precisely at 07:30 AM (Local Time).
+    Triggered precisely at 06:00 AM (Local Time).
     Dumps the master daily payload to a timestamped JSON file, then resets.
     """
     logger.info("---| EXECUTING DAILY SAVE & RESET |---")
@@ -229,3 +229,106 @@ def execute_daily_save_and_reset(
     daily_articles_cache.clear()
     seen_urls.clear()
     logger.info("---| Reset complete. Booting the fresh cycle. |---")
+
+
+def execute_incremental_save(daily_articles_cache: list) -> None:
+    """
+    Dumps the master daily payload without resetting the cache.
+    Used for incremental extraction to speed up final generation.
+    """
+    logger.info("---| EXECUTING INCREMENTAL SAVE |---")
+
+    now = datetime.now(LOCAL_TZ)
+
+    if not is_us_trading_day(now):
+        return
+
+    date_str = now.strftime("%Y%m%d")
+    date_formatted = now.strftime("%Y-%m-%d %I:%M %p")
+    filename = f"daily_news_{date_str}.json"
+
+    master_payload = {
+        "date": date_formatted,
+        "market_map": {},
+        "weekly_schedule": {},
+        "articles": daily_articles_cache,
+    }
+
+    try:
+        data_dir = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data"
+        )
+        os.makedirs(data_dir, exist_ok=True)
+        filepath = os.path.join(data_dir, filename)
+        with open(filepath, "w", encoding="utf-8") as f:
+            json.dump(master_payload, f, ensure_ascii=False, indent=2)
+        logger.info(
+            f"Successfully saved Incremental Payload ({len(daily_articles_cache)} articles) to {filename}."
+        )
+    except Exception as e:
+        logger.error(f"Failed to save {filename}: {e}")
+
+
+def execute_premarket_save(daily_articles_cache: list) -> None:
+    """
+    Triggered precisely at 08:30 AM (Local Time).
+    Merges the 06:00 AM daily_news dump with current cache for the premarket context.
+    """
+    logger.info("---| EXECUTING PREMARKET SAVE |---")
+
+    now = datetime.now(LOCAL_TZ)
+
+    if not is_us_trading_day(now):
+        return
+
+    date_str = now.strftime("%Y%m%d")
+    date_formatted = now.strftime("%Y-%m-%d %I:%M %p")
+
+    data_dir = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data"
+    )
+    os.makedirs(data_dir, exist_ok=True)
+
+    # Read the 06:00 AM dump
+    full_report_filename = f"daily_news_{date_str}.json"
+    full_report_filepath = os.path.join(data_dir, full_report_filename)
+
+    merged_articles = []
+    if os.path.exists(full_report_filepath):
+        try:
+            with open(full_report_filepath, "r", encoding="utf-8") as f:
+                full_data = json.load(f)
+                merged_articles.extend(full_data.get("articles", []))
+        except Exception as e:
+            logger.error(f"Failed to read {full_report_filename}: {e}")
+
+    # Add current cache
+    merged_articles.extend(daily_articles_cache)
+
+    # Deduplicate just in case
+    seen = set()
+    unique_merged = []
+    for art in merged_articles:
+        url = art.get("url")
+        if url not in seen:
+            seen.add(url)
+            unique_merged.append(art)
+
+    filename = f"premarket_news_{date_str}.json"
+
+    master_payload = {
+        "date": date_formatted,
+        "market_map": {},
+        "weekly_schedule": {},
+        "articles": unique_merged,
+    }
+
+    try:
+        filepath = os.path.join(data_dir, filename)
+        with open(filepath, "w", encoding="utf-8") as f:
+            json.dump(master_payload, f, ensure_ascii=False, indent=2)
+        logger.info(
+            f"Successfully saved Premarket Payload ({len(unique_merged)} articles) to {filename}."
+        )
+    except Exception as e:
+        logger.error(f"Failed to save {filename}: {e}")

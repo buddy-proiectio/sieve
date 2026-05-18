@@ -45,7 +45,11 @@ from datetime import datetime, timedelta
 from typing import List, Dict, Set
 from dateutil import parser as date_parser
 from market_engine import fetch_market_map
-from daily_job import execute_daily_save_and_reset
+from daily_job import (
+    execute_daily_save_and_reset,
+    execute_incremental_save,
+    execute_premarket_save,
+)
 
 # Add project root to sys.path to allow importing from 'shared'
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -64,7 +68,7 @@ logging.getLogger("trafilatura").setLevel(logging.CRITICAL)
 LOCAL_TZ_NAME = "America/New_York"
 LOCAL_TZ = pytz.timezone(LOCAL_TZ_NAME)
 
-RESET_TIME_STR = "07:30"
+RESET_TIME_STR = "06:00"
 CHECK_INTERVAL_MINUTES = 10
 LOG_FILE = "logs/sieve.log"
 
@@ -566,11 +570,8 @@ def process_rss_feed(feed_name: str, feed_url: str) -> None:
 
 
 # ==============================================================================
-def trigger_daily_save():
-    """Merges memory and disk cache then triggers the final daily save."""
-    global daily_articles_cache
-
-    # Load from disk if exists
+def load_and_combine_cache():
+    """Helper to load disk cache and combine with memory cache."""
     disk_data = []
     if os.path.exists(TEMP_CACHE_FILE):
         try:
@@ -582,7 +583,14 @@ def trigger_daily_save():
             logger.error(f"Failed to read/remove temp cache file: {e}")
 
     # Combine all
-    all_articles = disk_data + daily_articles_cache
+    return disk_data + daily_articles_cache
+
+
+def trigger_daily_save():
+    """Merges memory and disk cache then triggers the final daily save."""
+    global daily_articles_cache
+
+    all_articles = load_and_combine_cache()
 
     execute_daily_save_and_reset(
         all_articles,
@@ -592,6 +600,33 @@ def trigger_daily_save():
     )
 
     daily_articles_cache.clear()
+
+
+def trigger_incremental_save():
+    """Merges memory and disk cache then triggers an incremental save (no cache clear)."""
+    global daily_articles_cache
+
+    all_articles = load_and_combine_cache()
+
+    # We must put them back in memory or disk since we didn't clear cache,
+    # but load_and_combine_cache deleted TEMP_CACHE_FILE.
+    # So we write all_articles back to memory cache.
+    daily_articles_cache.clear()
+    daily_articles_cache.extend(all_articles)
+
+    execute_incremental_save(daily_articles_cache)
+
+
+def trigger_premarket_save():
+    """Merges memory and disk cache then triggers the premarket save (no cache clear)."""
+    global daily_articles_cache
+
+    all_articles = load_and_combine_cache()
+
+    daily_articles_cache.clear()
+    daily_articles_cache.extend(all_articles)
+
+    execute_premarket_save(daily_articles_cache)
 
 
 def the_sieve_job() -> None:
@@ -617,10 +652,23 @@ def main():
         # 1. Schedule the repeating interval
         schedule.every(CHECK_INTERVAL_MINUTES).minutes.do(the_sieve_job)
 
-        # 2. Schedule the Daily Save & Reset explicitly using the Local Timezone at 07:30
+        # 2. Schedule the Daily Saves explicitly using the Local Timezone
         try:
-            schedule.every().day.at("07:30", tz=LOCAL_TZ_NAME).do(trigger_daily_save)
-            logger.info(f"Scheduled daily dump for 07:30 AM {LOCAL_TZ_NAME} timezone.")
+            schedule.every().day.at("00:00", tz=LOCAL_TZ_NAME).do(
+                trigger_incremental_save
+            )
+            schedule.every().day.at("03:00", tz=LOCAL_TZ_NAME).do(
+                trigger_incremental_save
+            )
+            schedule.every().day.at("06:00", tz=LOCAL_TZ_NAME).do(trigger_daily_save)
+            schedule.every().day.at("08:30", tz=LOCAL_TZ_NAME).do(
+                trigger_premarket_save
+            )
+            logger.info(
+                f"Scheduled incremental saves for 00:00, 03:00 {LOCAL_TZ_NAME} timezone."
+            )
+            logger.info(f"Scheduled daily dump for 06:00 {LOCAL_TZ_NAME} timezone.")
+            logger.info(f"Scheduled premarket dump for 08:30 {LOCAL_TZ_NAME} timezone.")
         except Exception as e:
             logger.error(
                 f"Timezone schedule registration failed (check schedule library version): {e}"
