@@ -1,5 +1,7 @@
 import logging
 import sys
+import os
+from typing import Optional
 
 
 class ColoredFormatter(logging.Formatter):
@@ -22,10 +24,7 @@ class ColoredFormatter(logging.Formatter):
         )
 
 
-import os
-
-
-def setup_logger(log_file: str = None, logger_name: str = None) -> logging.Logger:
+def setup_logger(log_file: Optional[str] = None, logger_name: Optional[str] = None) -> logging.Logger:
     if log_file:
         log_dir = os.path.dirname(log_file)
         if log_dir:

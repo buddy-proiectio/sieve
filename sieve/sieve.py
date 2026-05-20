@@ -483,14 +483,14 @@ def process_rss_feed(feed_name: str, feed_url: str) -> None:
         new_matches_count = 0
 
         for entry in feed.entries:
-            url = entry.get("link", "")
+            url = str(entry.get("link", ""))
 
             # Instant exact URL drop
             if not url or url in seen_urls:
                 continue
 
             # Check if publication is within the current active cycle
-            pub_str = entry.get("published", "") or entry.get("updated", "")
+            pub_str = str(entry.get("published", "") or entry.get("updated", ""))
             pub_dt = parse_published_time(pub_str)
 
             if pub_dt < window_start:
@@ -499,7 +499,7 @@ def process_rss_feed(feed_name: str, feed_url: str) -> None:
 
             pub_iso = pub_dt.isoformat()
 
-            title = entry.get("title", "").strip()
+            title = str(entry.get("title", "")).strip()
             if feed_name.startswith("X, @"):
                 first_sentence = re.split(r"(?<=[.!?])\s+|\n", title)[0].strip()
                 title = f"{first_sentence} ({feed_name})"
@@ -511,7 +511,7 @@ def process_rss_feed(feed_name: str, feed_url: str) -> None:
                 else:
                     title = f"{ticker} SEC Filing"
 
-            summary_html = entry.get("summary", "") or entry.get("description", "")
+            summary_html = str(entry.get("summary", "") or entry.get("description", ""))
             summary = strip_html_tags(summary_html)
 
             is_sec_feed = feed_name.startswith("SEC EDGAR")
