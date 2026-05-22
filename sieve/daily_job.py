@@ -1,6 +1,7 @@
 import json
 import os
 import sys
+import re
 import requests
 import holidays
 import pytz
@@ -36,109 +37,189 @@ def is_us_trading_day(dt: datetime) -> bool:
     return True
 
 
-def fetch_weekly_schedule(finnhub_api_key: str, target_tickers: list) -> dict:
+US_HOLIDAYS_MAP = {
+    "New Year's Day": "새해 첫날",
+    "Martin Luther King Jr. Day": "마틴 루터 킹 주니어 탄생일",
+    "Washington's Birthday": "워싱턴 탄생일",
+    "Good Friday": "성금요일",
+    "Memorial Day": "메모리얼 데이",
+    "Juneteenth National Independence Day": "준틴스 데이",
+    "Independence Day": "독립기념일",
+    "Labor Day": "노동절",
+    "Thanksgiving Day": "추수감사절",
+    "Christmas Day": "크리스마스",
+}
+
+
+def fetch_weekly_schedule(finnhub_api_key: str, target_tickers: list) -> list:
     """
-    Fetches Macro Events (via Forex Factory XML Archive), Earnings Calls (via Finnhub API),
-    and Holidays for US & AU for the window [Today ~ Today + 7 days].
+    Fetches Macro Events (via Investing.com economic calendar API), Earnings Calls (via Finnhub API),
+    and NYSE Public Holidays for the window [Today ~ Today + 7 days].
+    All events are stored as a flat list of UTC-time scheduled objects.
     """
     now_local = datetime.now(LOCAL_TZ)
 
     # Target 7-day window: Today + 7 days (8 days total including today)
     dates_to_check = [now_local.date() + timedelta(days=i) for i in range(8)]
 
-    start_date = dates_to_check[0].strftime("%Y-%m-%d")
-    end_date = dates_to_check[-1].strftime("%Y-%m-%d")
+    # Formulate start and end datetimes in LOCAL_TZ
+    start_dt_local = datetime.combine(dates_to_check[0], datetime.min.time())
+    start_dt_local = LOCAL_TZ.localize(start_dt_local)
+    end_dt_local = datetime.combine(dates_to_check[-1], datetime.max.time())
+    end_dt_local = LOCAL_TZ.localize(end_dt_local)
 
-    schedule_dict = {}
-    weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    # Convert to UTC for API requests
+    start_dt_utc = start_dt_local.astimezone(pytz.UTC)
+    end_dt_utc = end_dt_local.astimezone(pytz.UTC)
 
-    # Initialize dictionary keys with English formatting
+    # Build ISO 8601 strings with UTC Zulu representation
+    start_date_str = start_dt_utc.strftime("%Y-%m-%dT%H:%M:%S.000Z")
+    end_date_str = end_dt_utc.strftime("%Y-%m-%dT%H:%M:%S.999Z")
+
+    weekly_schedule = []
+    seen_events = set()
+
+    # --------------------------------------------------------------------------
+    # Part 0: US Public NYSE Holidays (Only actual trading closures)
+    # --------------------------------------------------------------------------
+    years_to_check = list({d.year for d in dates_to_check})
+    nyse_holidays = holidays.financial_holidays("NYSE", years=years_to_check)
+
     for d in dates_to_check:
-        day_str = f"{d.strftime('%d %b')} ({weekdays[d.weekday()]})"
-        schedule_dict[day_str] = []
+        if d in nyse_holidays:
+            h_name = nyse_holidays.get(d)
+            # If "(observed)" is in h_name, replace "(observed)" with "(대체 휴일)"
+            if "(observed)" in h_name.lower():
+                clean_name = re.sub(
+                    r"\s*\(observed\)", "", h_name, flags=re.IGNORECASE
+                ).strip()
+                korean_base = US_HOLIDAYS_MAP.get(clean_name, clean_name)
+                korean_h_name = f"{korean_base} (대체 휴일)"
+            else:
+                korean_h_name = US_HOLIDAYS_MAP.get(h_name, h_name)
+
+            # Create UTC time representation (Start of day UTC)
+            utc_time_str = f"{d.strftime('%Y-%m-%d')}T00:00:00Z"
+
+            h_key = f"holiday_{utc_time_str}_{h_name}"
+            if h_key not in seen_events:
+                seen_events.add(h_key)
+                weekly_schedule.append(
+                    {
+                        "currency": "USD",
+                        "importance": "holiday",
+                        "name": h_name,
+                        "korean_name": korean_h_name,
+                        "source_url": "",
+                        "utc_time": utc_time_str,
+                    }
+                )
 
     # --------------------------------------------------------------------------
-    # Part 0: US and Australia Public Holidays
-    # --------------------------------------------------------------------------
-    us_holidays = holidays.US(years=[dates_to_check[0].year, dates_to_check[-1].year])
-    au_holidays = holidays.AU(years=[dates_to_check[0].year, dates_to_check[-1].year])
-
-    for d in dates_to_check:
-        day_str = f"{d.strftime('%d %b')} ({weekdays[d.weekday()]})"
-        us_event = us_holidays.get(d)
-        au_event = au_holidays.get(d)
-
-        if us_event and au_event and us_event == au_event:
-            formatted_event = f"★ [Holiday] {us_event}"
-            if formatted_event not in schedule_dict[day_str]:
-                schedule_dict[day_str].append(formatted_event)
-        else:
-            if us_event:
-                formatted_event = f"★ [US Holiday] {us_event}"
-                if formatted_event not in schedule_dict[day_str]:
-                    schedule_dict[day_str].append(formatted_event)
-            if au_event:
-                formatted_event = f"★ [AU Holiday] {au_event}"
-                if formatted_event not in schedule_dict[day_str]:
-                    schedule_dict[day_str].append(formatted_event)
-
-    # --------------------------------------------------------------------------
-    # Part A: Macro Events (via Forex Factory XML)
+    # Part A: Macro Events (via Investing.com API)
     # --------------------------------------------------------------------------
     try:
-        import xml.etree.ElementTree as ET
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        }
 
-        url = "https://nfs.faireconomy.media/ff_calendar_thisweek.xml"
-        with requests.get(url, timeout=30) as response:
-            response.raise_for_status()
-            content = response.content
+        base_url = "https://endpoints.investing.com/pd-instruments/v1/calendars/economic/events/occurrences"
+        params_en = {
+            "limit": "200",
+            "start_date": start_date_str,
+            "end_date": end_date_str,
+            "country_ids": "25,37,72,17,35,12,4,5,11",
+            "importance": "high,medium",
+        }
 
-        root = ET.fromstring(content)
-        for event in root.findall("event"):
-            country_elem = event.find("country")
-            impact_elem = event.find("impact")
+        logger.info(
+            f"Fetching English Macro Events from Investing.com: {base_url} with params {params_en}"
+        )
+        with requests.get(
+            base_url, params=params_en, headers=headers, timeout=30
+        ) as en_response:
+            en_response.raise_for_status()
+            en_data = en_response.json()
 
-            country = country_elem.text if country_elem is not None else ""
-            impact = impact_elem.text if impact_elem is not None else ""
+        params_ko = params_en.copy()
+        params_ko["domain_id"] = "18"
 
+        logger.info(
+            f"Fetching Korean Macro Events from Investing.com: {base_url} with params {params_ko}"
+        )
+        with requests.get(
+            base_url, params=params_ko, headers=headers, timeout=30
+        ) as ko_response:
+            ko_response.raise_for_status()
+            ko_data = ko_response.json()
+
+        en_events_dict = {item["event_id"]: item for item in en_data.get("events", [])}
+        ko_events_dict = {item["event_id"]: item for item in ko_data.get("events", [])}
+
+        en_occurrences = en_data.get("occurrences", [])
+        for occ in en_occurrences:
+            event_id = occ.get("event_id")
+            occurrence_time = occ.get(
+                "occurrence_time"
+            )  # Format: "2026-05-18T02:00:00Z"
+            if not event_id or not occurrence_time:
+                continue
+
+            occ_key = f"{event_id}_{occurrence_time}"
+            if occ_key in seen_events:
+                continue
+
+            en_evt = en_events_dict.get(event_id)
+            if not en_evt:
+                continue
+
+            currency = en_evt.get("currency")
+            importance = en_evt.get("importance", "").lower()
+
+            # Filter conditions
             include_event = False
-            macro_prefix = ""
-
-            if country in ["JPY", "AUD", "CNY", "EUR"] and impact == "High":
+            if (
+                currency in ["JPY", "AUD", "CNY", "EUR", "GBP", "CAD"]
+                and importance == "high"
+            ):
                 include_event = True
-                if country == "JPY":
-                    macro_prefix = "[JP Macro]"
-                elif country == "AUD":
-                    macro_prefix = "[AU Macro]"
-                elif country == "CNY":
-                    macro_prefix = "[CN Macro]"
-                elif country == "EUR":
-                    macro_prefix = "[EUR Macro]"
-            elif country == "USD" and impact in ["High", "Medium"]:
+            elif currency in ["USD", "KRW"] and importance in ["high", "medium"]:
                 include_event = True
-                if impact == "High":
-                    macro_prefix = "★ [US Macro]"
-                else:
-                    macro_prefix = "[US Macro]"
 
             if include_event:
-                date_elem = event.find("date")  # Typical format: MM-DD-YYYY
-                title_elem = event.find("title")
+                seen_events.add(occ_key)
 
-                date_str = date_elem.text if date_elem is not None else ""
-                title = title_elem.text if title_elem is not None else "Unknown Event"
+                name = (
+                    en_evt.get("short_name")
+                    or en_evt.get("event_translated")
+                    or en_evt.get("event_meta_title")
+                    or ""
+                )
+                ko_evt = ko_events_dict.get(event_id)
+                korean_name = ""
+                if ko_evt:
+                    korean_name = (
+                        ko_evt.get("short_name")
+                        or ko_evt.get("event_translated")
+                        or ko_evt.get("event_meta_title")
+                        or ""
+                    )
 
-                if date_str:
-                    # FF's XML date format is `m-d-Y`
-                    event_date = datetime.strptime(date_str, "%m-%d-%Y").date()
-                    if event_date in dates_to_check:
-                        day_str = f"{event_date.strftime('%d %b')} ({weekdays[event_date.weekday()]})"
-                        formatted_event = f"{macro_prefix} {title}"
-                        if formatted_event not in schedule_dict[day_str]:
-                            schedule_dict[day_str].append(formatted_event)
+                source_url = en_evt.get("source_url") or ""
+
+                weekly_schedule.append(
+                    {
+                        "currency": currency,
+                        "importance": importance,
+                        "name": name.strip(),
+                        "korean_name": korean_name.strip(),
+                        "source_url": source_url.strip(),
+                        "utc_time": occurrence_time,
+                    }
+                )
 
     except Exception as e:
-        logger.error(f"Failed to fetch Forex Factory Macro XML: {e}")
+        logger.error(f"Failed to fetch Investing.com Economic Calendar: {e}")
 
     # --------------------------------------------------------------------------
     # Part B: Earnings Calls (via Finnhub API)
@@ -146,6 +227,8 @@ def fetch_weekly_schedule(finnhub_api_key: str, target_tickers: list) -> dict:
     if finnhub_api_key:
         try:
             logger.info("Fetching weekly earnings schedule via Finnhub API...")
+            start_date = dates_to_check[0].strftime("%Y-%m-%d")
+            end_date = dates_to_check[-1].strftime("%Y-%m-%d")
             finnhub_url = f"https://finnhub.io/api/v1/calendar/earnings?from={start_date}&to={end_date}&token={finnhub_api_key}"
             with requests.get(finnhub_url, timeout=30) as response:
                 if response.status_code == 200:
@@ -161,12 +244,22 @@ def fetch_weekly_schedule(finnhub_api_key: str, target_tickers: list) -> dict:
                                     date_str, "%Y-%m-%d"
                                 ).date()
                                 if event_date in dates_to_check:
-                                    day_str = f"{event_date.strftime('%d %b')} ({weekdays[event_date.weekday()]})"
-                                    formatted_event = (
-                                        f"★ [Earnings] {ticker} Earnings Call"
-                                    )
-                                    if formatted_event not in schedule_dict[day_str]:
-                                        schedule_dict[day_str].append(formatted_event)
+                                    # Formulate UTC time (start of day UTC)
+                                    utc_time_str = f"{date_str}T00:00:00Z"
+
+                                    e_key = f"earnings_{utc_time_str}_{ticker}"
+                                    if e_key not in seen_events:
+                                        seen_events.add(e_key)
+                                        weekly_schedule.append(
+                                            {
+                                                "currency": "USD",
+                                                "importance": "earnings",
+                                                "name": f"{ticker} Earnings Call",
+                                                "korean_name": f"{ticker} 실적 발표",
+                                                "source_url": "",
+                                                "utc_time": utc_time_str,
+                                            }
+                                        )
                 else:
                     logger.error(
                         f"Finnhub API returned status code {response.status_code}"
@@ -177,7 +270,7 @@ def fetch_weekly_schedule(finnhub_api_key: str, target_tickers: list) -> dict:
     else:
         logger.warning("Finnhub API key not found. Skipping earnings.")
 
-    return schedule_dict
+    return weekly_schedule
 
 
 def execute_daily_save_and_reset(
