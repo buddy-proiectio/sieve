@@ -2,506 +2,607 @@
   {
     "Symbol": "AAPL",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Technology Hardware, Storage & Peripherals"
+    "GICS Sub-Industry": "Technology Hardware, Storage & Peripherals",
+    "Korean Name": "애플"
   },
   {
     "Symbol": "MSFT",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Systems Software"
+    "GICS Sub-Industry": "Systems Software",
+    "Korean Name": "마이크로소프트"
   },
   {
     "Symbol": "NVDA",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
+    "GICS Sub-Industry": "Semiconductors",
+    "Korean Name": "엔비디아"
   },
   {
     "Symbol": "AVGO",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
+    "GICS Sub-Industry": "Semiconductors",
+    "Korean Name": "브로드컴"
   },
   {
     "Symbol": "AMD",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
+    "GICS Sub-Industry": "Semiconductors",
+    "Korean Name": "AMD"
   },
   {
     "Symbol": "QCOM",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
+    "GICS Sub-Industry": "Semiconductors",
+    "Korean Name": "퀄컴"
   },
   {
     "Symbol": "INTC",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
+    "GICS Sub-Industry": "Semiconductors",
+    "Korean Name": "인텔"
   },
   {
     "Symbol": "TXN",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
+    "GICS Sub-Industry": "Semiconductors",
+    "Korean Name": "텍사스 인스트루먼트"
   },
   {
     "Symbol": "TSM",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
+    "GICS Sub-Industry": "Semiconductors",
+    "Korean Name": "TSMC"
   },
   {
     "Symbol": "ARM",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
+    "GICS Sub-Industry": "Semiconductors",
+    "Korean Name": "ARM"
   },
   {
     "Symbol": "SMCI",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Technology Hardware, Storage & Peripherals"
+    "GICS Sub-Industry": "Technology Hardware, Storage & Peripherals",
+    "Korean Name": "슈퍼마이크로컴퓨터"
   },
   {
     "Symbol": "MU",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Semiconductors"
+    "GICS Sub-Industry": "Semiconductors",
+    "Korean Name": "마이크론 테크놀로지"
   },
   {
     "Symbol": "ADBE",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Application Software"
+    "GICS Sub-Industry": "Application Software",
+    "Korean Name": "어도비"
   },
   {
     "Symbol": "CRM",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Application Software"
+    "GICS Sub-Industry": "Application Software",
+    "Korean Name": "세일즈포스"
   },
   {
     "Symbol": "ORCL",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Application Software"
+    "GICS Sub-Industry": "Application Software",
+    "Korean Name": "오라클"
   },
   {
     "Symbol": "IBM",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "IT Consulting & Other Services"
+    "GICS Sub-Industry": "IT Consulting & Other Services",
+    "Korean Name": "IBM"
   },
   {
     "Symbol": "NOW",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Systems Software"
+    "GICS Sub-Industry": "Systems Software",
+    "Korean Name": "서비스나우"
   },
   {
     "Symbol": "PLTR",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Application Software"
+    "GICS Sub-Industry": "Application Software",
+    "Korean Name": "팔란티어"
   },
   {
     "Symbol": "PANW",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Systems Software"
+    "GICS Sub-Industry": "Systems Software",
+    "Korean Name": "팔로알토 네트웍스"
   },
   {
     "Symbol": "SNOW",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Application Software"
+    "GICS Sub-Industry": "Application Software",
+    "Korean Name": "스노우플레이크"
   },
   {
     "Symbol": "GOOGL",
     "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Interactive Media & Services"
+    "GICS Sub-Industry": "Interactive Media & Services",
+    "Korean Name": "구글"
   },
   {
     "Symbol": "META",
     "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Interactive Media & Services"
+    "GICS Sub-Industry": "Interactive Media & Services",
+    "Korean Name": "메타"
   },
   {
     "Symbol": "NFLX",
     "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Movies & Entertainment"
+    "GICS Sub-Industry": "Movies & Entertainment",
+    "Korean Name": "넷플릭스"
   },
   {
     "Symbol": "DIS",
     "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Movies & Entertainment"
+    "GICS Sub-Industry": "Movies & Entertainment",
+    "Korean Name": "디즈니"
   },
   {
     "Symbol": "CMCSA",
     "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Cable & Satellite"
+    "GICS Sub-Industry": "Cable & Satellite",
+    "Korean Name": "컴캐스트"
   },
   {
     "Symbol": "T",
     "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Integrated Telecommunication Services"
+    "GICS Sub-Industry": "Integrated Telecommunication Services",
+    "Korean Name": "AT&T"
   },
   {
     "Symbol": "VZ",
     "GICS Sector": "Communication Services",
-    "GICS Sub-Industry": "Integrated Telecommunication Services"
+    "GICS Sub-Industry": "Integrated Telecommunication Services",
+    "Korean Name": "버라이즌"
   },
   {
     "Symbol": "AMZN",
     "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Broadline Retail"
+    "GICS Sub-Industry": "Broadline Retail",
+    "Korean Name": "아마존"
   },
   {
     "Symbol": "TSLA",
     "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Automobile Manufacturers"
+    "GICS Sub-Industry": "Automobile Manufacturers",
+    "Korean Name": "테슬라"
   },
   {
     "Symbol": "HD",
     "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Home Improvement Retail"
+    "GICS Sub-Industry": "Home Improvement Retail",
+    "Korean Name": "홈디포"
   },
   {
     "Symbol": "NKE",
     "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Footwear"
+    "GICS Sub-Industry": "Footwear",
+    "Korean Name": "나이키"
   },
   {
     "Symbol": "MCD",
     "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Restaurants"
+    "GICS Sub-Industry": "Restaurants",
+    "Korean Name": "맥도날드"
   },
   {
     "Symbol": "SBUX",
     "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Restaurants"
+    "GICS Sub-Industry": "Restaurants",
+    "Korean Name": "스타벅스"
   },
   {
     "Symbol": "BKNG",
     "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Hotels, Resorts & Cruise Lines"
+    "GICS Sub-Industry": "Hotels, Resorts & Cruise Lines",
+    "Korean Name": "부킹홀딩스"
   },
   {
     "Symbol": "TJX",
     "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Apparel Retail"
+    "GICS Sub-Industry": "Apparel Retail",
+    "Korean Name": "TJX"
   },
   {
     "Symbol": "LOW",
     "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Home Improvement Retail"
+    "GICS Sub-Industry": "Home Improvement Retail",
+    "Korean Name": "로우스"
   },
   {
     "Symbol": "UBER",
     "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Passenger Ground Transportation"
+    "GICS Sub-Industry": "Passenger Ground Transportation",
+    "Korean Name": "우버"
   },
   {
     "Symbol": "LULU",
     "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Apparel, Accessories & Luxury Goods"
+    "GICS Sub-Industry": "Apparel, Accessories & Luxury Goods",
+    "Korean Name": "룰루레몬"
   },
   {
     "Symbol": "ABNB",
     "GICS Sector": "Consumer Discretionary",
-    "GICS Sub-Industry": "Hotels, Resorts & Cruise Lines"
+    "GICS Sub-Industry": "Hotels, Resorts & Cruise Lines",
+    "Korean Name": "에어비앤비"
   },
   {
     "Symbol": "PG",
     "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Household Products"
+    "GICS Sub-Industry": "Household Products",
+    "Korean Name": "프록터 앤 갬블"
   },
   {
     "Symbol": "KO",
     "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Soft Drinks"
+    "GICS Sub-Industry": "Soft Drinks",
+    "Korean Name": "코카콜라"
   },
   {
     "Symbol": "PEP",
     "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Soft Drinks"
+    "GICS Sub-Industry": "Soft Drinks",
+    "Korean Name": "펩시코"
   },
   {
     "Symbol": "COST",
     "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Hypermarkets & Super Centers"
+    "GICS Sub-Industry": "Hypermarkets & Super Centers",
+    "Korean Name": "코스트코"
   },
   {
     "Symbol": "WMT",
     "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Hypermarkets & Super Centers"
+    "GICS Sub-Industry": "Hypermarkets & Super Centers",
+    "Korean Name": "월마트"
   },
   {
     "Symbol": "PM",
     "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Tobacco"
+    "GICS Sub-Industry": "Tobacco",
+    "Korean Name": "필립모리스"
   },
   {
     "Symbol": "MDLZ",
     "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Packaged Foods & Meats"
+    "GICS Sub-Industry": "Packaged Foods & Meats",
+    "Korean Name": "몬델리즈"
   },
   {
     "Symbol": "MO",
     "GICS Sector": "Consumer Staples",
-    "GICS Sub-Industry": "Tobacco"
+    "GICS Sub-Industry": "Tobacco",
+    "Korean Name": "알트리아"
   },
   {
     "Symbol": "LLY",
     "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Pharmaceuticals"
+    "GICS Sub-Industry": "Pharmaceuticals",
+    "Korean Name": "일라이 릴리"
   },
   {
     "Symbol": "NVO",
     "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Pharmaceuticals"
+    "GICS Sub-Industry": "Pharmaceuticals",
+    "Korean Name": "노보 노디스크"
   },
   {
     "Symbol": "AZN",
     "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Pharmaceuticals"
+    "GICS Sub-Industry": "Pharmaceuticals",
+    "Korean Name": "아스트라제네카"
   },
   {
     "Symbol": "UNH",
     "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Managed Health Care"
+    "GICS Sub-Industry": "Managed Health Care",
+    "Korean Name": "유나이티드헬스"
   },
   {
     "Symbol": "JNJ",
     "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Pharmaceuticals"
+    "GICS Sub-Industry": "Pharmaceuticals",
+    "Korean Name": "존슨앤존슨"
   },
   {
     "Symbol": "MRK",
     "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Pharmaceuticals"
+    "GICS Sub-Industry": "Pharmaceuticals",
+    "Korean Name": "머크"
   },
   {
     "Symbol": "ABBV",
     "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Biotechnology"
+    "GICS Sub-Industry": "Biotechnology",
+    "Korean Name": "애브비"
   },
   {
     "Symbol": "PFE",
     "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Pharmaceuticals"
+    "GICS Sub-Industry": "Pharmaceuticals",
+    "Korean Name": "화이자"
   },
   {
     "Symbol": "AMGN",
     "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Biotechnology"
+    "GICS Sub-Industry": "Biotechnology",
+    "Korean Name": "암젠"
   },
   {
     "Symbol": "DHR",
     "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Life Sciences Tools & Services"
+    "GICS Sub-Industry": "Life Sciences Tools & Services",
+    "Korean Name": "다나허"
   },
   {
     "Symbol": "ISRG",
     "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Health Care Equipment"
+    "GICS Sub-Industry": "Health Care Equipment",
+    "Korean Name": "인튜이티브 서지컬"
   },
   {
     "Symbol": "BIIB",
     "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Biotechnology"
+    "GICS Sub-Industry": "Biotechnology",
+    "Korean Name": "바이오젠"
   },
   {
     "Symbol": "REGN",
     "GICS Sector": "Health Care",
-    "GICS Sub-Industry": "Biotechnology"
+    "GICS Sub-Industry": "Biotechnology",
+    "Korean Name": "리제네론"
   },
   {
     "Symbol": "JPM",
     "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Diversified Banks"
+    "GICS Sub-Industry": "Diversified Banks",
+    "Korean Name": "JP모건 체이스"
   },
   {
     "Symbol": "BAC",
     "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Diversified Banks"
+    "GICS Sub-Industry": "Diversified Banks",
+    "Korean Name": "뱅크오브아메리카"
   },
   {
     "Symbol": "WFC",
     "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Diversified Banks"
+    "GICS Sub-Industry": "Diversified Banks",
+    "Korean Name": "웰스파고"
   },
   {
     "Symbol": "MS",
     "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Investment Banking & Brokerage"
+    "GICS Sub-Industry": "Investment Banking & Brokerage",
+    "Korean Name": "모건스탠리"
   },
   {
     "Symbol": "GS",
     "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Investment Banking & Brokerage"
+    "GICS Sub-Industry": "Investment Banking & Brokerage",
+    "Korean Name": "골드만삭스"
   },
   {
     "Symbol": "C",
     "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Diversified Banks"
+    "GICS Sub-Industry": "Diversified Banks",
+    "Korean Name": "시티그룹"
   },
   {
     "Symbol": "BRK.B",
     "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Multi-Sector Holdings"
+    "GICS Sub-Industry": "Multi-Sector Holdings",
+    "Korean Name": "버크셔 해서웨이"
   },
   {
     "Symbol": "V",
     "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Transaction & Payment Processing Services"
+    "GICS Sub-Industry": "Transaction & Payment Processing Services",
+    "Korean Name": "비자"
   },
   {
     "Symbol": "MA",
     "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Transaction & Payment Processing Services"
+    "GICS Sub-Industry": "Transaction & Payment Processing Services",
+    "Korean Name": "마스터카드"
   },
   {
     "Symbol": "BLK",
     "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Asset Management & Custody Banks"
+    "GICS Sub-Industry": "Asset Management & Custody Banks",
+    "Korean Name": "블랙록"
   },
   {
     "Symbol": "BX",
     "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Asset Management & Custody Banks"
+    "GICS Sub-Industry": "Asset Management & Custody Banks",
+    "Korean Name": "블랙스톤"
   },
   {
     "Symbol": "SCHW",
     "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Investment Banking & Brokerage"
+    "GICS Sub-Industry": "Investment Banking & Brokerage",
+    "Korean Name": "찰스 슈왑"
   },
   {
     "Symbol": "AXP",
     "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Consumer Finance"
+    "GICS Sub-Industry": "Consumer Finance",
+    "Korean Name": "아메리칸 익스프레스"
   },
   {
     "Symbol": "CAT",
     "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Construction Machinery & Heavy Transportation Equipment"
+    "GICS Sub-Industry": "Construction Machinery & Heavy Transportation Equipment",
+    "Korean Name": "캐터필러"
   },
   {
     "Symbol": "GE",
     "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Aerospace & Defense"
+    "GICS Sub-Industry": "Aerospace & Defense",
+    "Korean Name": "GE 에어로스페이스"
   },
   {
     "Symbol": "HON",
     "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Industrial Conglomerates"
+    "GICS Sub-Industry": "Industrial Conglomerates",
+    "Korean Name": "허니웰"
   },
   {
     "Symbol": "UNP",
     "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Rail Transportation"
+    "GICS Sub-Industry": "Rail Transportation",
+    "Korean Name": "유니언 퍼시픽"
   },
   {
     "Symbol": "UPS",
     "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Air Freight & Logistics"
+    "GICS Sub-Industry": "Air Freight & Logistics",
+    "Korean Name": "UPS"
   },
   {
     "Symbol": "BA",
     "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Aerospace & Defense"
+    "GICS Sub-Industry": "Aerospace & Defense",
+    "Korean Name": "보잉"
   },
   {
     "Symbol": "LMT",
     "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Aerospace & Defense"
+    "GICS Sub-Industry": "Aerospace & Defense",
+    "Korean Name": "록히드 마틴"
   },
   {
     "Symbol": "RTX",
     "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Aerospace & Defense"
+    "GICS Sub-Industry": "Aerospace & Defense",
+    "Korean Name": "RTX"
   },
   {
     "Symbol": "DE",
     "GICS Sector": "Industrials",
-    "GICS Sub-Industry": "Agricultural & Farm Machinery"
+    "GICS Sub-Industry": "Agricultural & Farm Machinery",
+    "Korean Name": "디어 앤 컴퍼니"
   },
   {
     "Symbol": "XOM",
     "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Integrated Oil & Gas"
+    "GICS Sub-Industry": "Integrated Oil & Gas",
+    "Korean Name": "엑손모빌"
   },
   {
     "Symbol": "CVX",
     "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Integrated Oil & Gas"
+    "GICS Sub-Industry": "Integrated Oil & Gas",
+    "Korean Name": "쉐브론"
   },
   {
     "Symbol": "COP",
     "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Exploration & Production"
+    "GICS Sub-Industry": "Oil & Gas Exploration & Production",
+    "Korean Name": "코노코필립스"
   },
   {
     "Symbol": "SLB",
     "GICS Sector": "Energy",
-    "GICS Sub-Industry": "Oil & Gas Equipment & Services"
+    "GICS Sub-Industry": "Oil & Gas Equipment & Services",
+    "Korean Name": "슐룸베르거"
   },
   {
     "Symbol": "NEE",
     "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Electric Utilities"
+    "GICS Sub-Industry": "Electric Utilities",
+    "Korean Name": "넥스트에라 에너지"
   },
   {
     "Symbol": "SO",
     "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Electric Utilities"
+    "GICS Sub-Industry": "Electric Utilities",
+    "Korean Name": "서던 컴퍼니"
   },
   {
     "Symbol": "DUK",
     "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Electric Utilities"
+    "GICS Sub-Industry": "Electric Utilities",
+    "Korean Name": "듀크 에너지"
   },
   {
     "Symbol": "CEG",
     "GICS Sector": "Utilities",
-    "GICS Sub-Industry": "Electric Utilities"
+    "GICS Sub-Industry": "Electric Utilities",
+    "Korean Name": "콘스텔레이션 에너지"
   },
   {
     "Symbol": "PLD",
     "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Industrial REITs"
+    "GICS Sub-Industry": "Industrial REITs",
+    "Korean Name": "프롤로지스"
   },
   {
     "Symbol": "AMT",
     "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Telecom Tower REITs"
+    "GICS Sub-Industry": "Telecom Tower REITs",
+    "Korean Name": "아메리칸 타워"
   },
   {
     "Symbol": "EQIX",
     "GICS Sector": "Real Estate",
-    "GICS Sub-Industry": "Data Center REITs"
+    "GICS Sub-Industry": "Data Center REITs",
+    "Korean Name": "에퀴닉스"
   },
   {
     "Symbol": "LIN",
     "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Industrial Gases"
+    "GICS Sub-Industry": "Industrial Gases",
+    "Korean Name": "린데"
   },
   {
     "Symbol": "APD",
     "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Industrial Gases"
+    "GICS Sub-Industry": "Industrial Gases",
+    "Korean Name": "에어 프로덕츠"
   },
   {
     "Symbol": "SHW",
     "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Specialty Chemicals"
+    "GICS Sub-Industry": "Specialty Chemicals",
+    "Korean Name": "셔윈-윌리엄스"
   },
   {
     "Symbol": "FCX",
     "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Copper"
+    "GICS Sub-Industry": "Copper",
+    "Korean Name": "프리포트 맥모란"
   },
   {
     "Symbol": "ALB",
     "GICS Sector": "Materials",
-    "GICS Sub-Industry": "Specialty Chemicals"
+    "GICS Sub-Industry": "Specialty Chemicals",
+    "Korean Name": "앨버말"
   },
   {
     "Symbol": "HOOD",
     "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Investment Banking & Brokerage"
+    "GICS Sub-Industry": "Investment Banking & Brokerage",
+    "Korean Name": "로빈후드"
   },
   {
     "Symbol": "COIN",
     "GICS Sector": "Financials",
-    "GICS Sub-Industry": "Financial Exchanges & Data"
+    "GICS Sub-Industry": "Financial Exchanges & Data",
+    "Korean Name": "코인베이스"
   },
   {
     "Symbol": "MSTR",
     "GICS Sector": "Information Technology",
-    "GICS Sub-Industry": "Application Software"
+    "GICS Sub-Industry": "Application Software",
+    "Korean Name": "마이크로스트래티지"
   }
 ]
