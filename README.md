@@ -144,9 +144,14 @@ cd sieve
 
 # Install dependencies and sync virtual environment
 uv sync
+
+# Copy the environment variable template and set up your API Key
+cp .env.example .env
 ```
 
 ### Running the Application
+
+Make sure you populate `FINNHUB_API_KEY` inside `.env` to enable corporate earnings schedule integration.
 
 ```bash
 # Run the daemon in the foreground

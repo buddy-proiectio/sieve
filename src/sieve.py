@@ -50,9 +50,11 @@ from daily_job import (
 )
 
 from shared.shared_logger import setup_logger
+from dotenv import load_dotenv
+
+load_dotenv()
 
 logger = setup_logger("logs/sieve.log", "sieve")
-
 # Suppress noisy lxml parsing warnings from trafilatura completely
 logging.getLogger("trafilatura").setLevel(logging.CRITICAL)
 
@@ -591,11 +593,17 @@ def trigger_daily_save():
 
     all_articles = load_and_combine_cache()
 
+    finnhub_key = os.getenv("FINNHUB_API_KEY")
+    if not finnhub_key:
+        logger.warning(
+            "FINNHUB_API_KEY environment variable is not set. Earnings calendar will be skipped."
+        )
+
     execute_daily_save_and_reset(
         all_articles,
         seen_urls,
         TARGET_TICKERS,
-        "d6dsu29r01qm89pkrqj0d6dsu29r01qm89pkrqjg",
+        finnhub_key,
     )
 
     daily_articles_cache.clear()
