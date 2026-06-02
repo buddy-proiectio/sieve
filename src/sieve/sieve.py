@@ -44,16 +44,14 @@ import trafilatura
 from datetime import datetime, timedelta
 from typing import List, Dict, Set
 from dateutil import parser as date_parser
-from market_engine import fetch_market_map
-from daily_job import (
+from .market_engine import fetch_market_map
+from .daily_job import (
     execute_daily_save_and_reset,
     execute_incremental_save,
     execute_premarket_save,
 )
 
-# Add project root to sys.path to allow importing from 'shared'
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from shared.shared_logger import setup_logger
+from .shared.shared_logger import setup_logger
 
 logger = setup_logger("logs/sieve.log", "sieve")
 
@@ -207,8 +205,11 @@ TEMP_CACHE_FILE = ".daily_cache_temp.json"
 def load_target_tickers() -> List[str]:
     """Loads tickers from the shared JSON file."""
     try:
-        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        json_path = os.path.join(project_root, "shared", "market_map_targets.json")
+        json_path = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            "shared",
+            "market_map_targets.json",
+        )
         with open(json_path, "r", encoding="utf-8") as f:
             data = json.load(f)
             return list(set(item["Symbol"] for item in data))

@@ -6,12 +6,8 @@ import requests
 import holidays
 import pytz
 from datetime import datetime, timedelta
-from market_engine import fetch_market_map
-
-
-# Add project root to sys.path to allow importing from 'shared'
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from shared.shared_logger import setup_logger
+from .market_engine import fetch_market_map
+from .shared.shared_logger import setup_logger
 
 logger = setup_logger("logs/sieve.log", "sieve")
 
@@ -305,9 +301,8 @@ def execute_daily_save_and_reset(
     }
 
     try:
-        data_dir = os.path.join(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data"
-        )
+        project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        data_dir = os.path.join(project_root, "data")
         os.makedirs(data_dir, exist_ok=True)
         filepath = os.path.join(data_dir, filename)
         with open(filepath, "w", encoding="utf-8") as f:
@@ -348,9 +343,8 @@ def execute_incremental_save(daily_articles_cache: list) -> None:
     }
 
     try:
-        data_dir = os.path.join(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data"
-        )
+        project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        data_dir = os.path.join(project_root, "data")
         os.makedirs(data_dir, exist_ok=True)
         filepath = os.path.join(data_dir, filename)
         with open(filepath, "w", encoding="utf-8") as f:
@@ -377,9 +371,8 @@ def execute_premarket_save(daily_articles_cache: list) -> None:
     date_str = now.strftime("%Y%m%d")
     date_formatted = now.strftime("%Y-%m-%d %I:%M %p")
 
-    data_dir = os.path.join(
-        os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data"
-    )
+    project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    data_dir = os.path.join(project_root, "data")
     os.makedirs(data_dir, exist_ok=True)
 
     # Read the 06:00 AM dump

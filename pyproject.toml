@@ -1,0 +1,24 @@
+[project]
+name = "sieve"
+version = "0.1.0"
+description = "Continuous news and market data scraper for Buddy"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "feedparser>=6.0.11",
+    "requests>=2.32.3",
+    "schedule>=1.2.2",
+    "pytz>=2024.1",
+    "python-dateutil>=2.8.2",
+    "cloudscraper>=1.2.71",
+    "trafilatura>=1.8.0",
+    "lxml>=5.2.0",
+    "holidays>=0.48",
+]
+
+[project.scripts]
+sieve = "sieve.sieve:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

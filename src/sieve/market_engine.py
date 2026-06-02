@@ -16,9 +16,7 @@ def get_scraper():
     return thread_local.scraper
 
 
-# Add project root to sys.path to allow importing from 'shared'
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from shared.shared_logger import setup_logger
+from .shared.shared_logger import setup_logger
 
 logger = setup_logger("logs/sieve.log", "sieve")
 
@@ -39,7 +37,7 @@ def fetch_market_map() -> dict:
 
     # 2. Load Market Map Targets
     targets_file = os.path.join(
-        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+        os.path.dirname(os.path.abspath(__file__)),
         "shared",
         "market_map_targets.json",
     )
