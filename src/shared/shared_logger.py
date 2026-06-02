@@ -24,19 +24,23 @@ class ColoredFormatter(logging.Formatter):
         )
 
 
-def setup_logger(log_file: Optional[str] = None, logger_name: Optional[str] = None) -> logging.Logger:
+def setup_logger(
+    log_file: Optional[str] = None, logger_name: Optional[str] = None
+) -> logging.Logger:
     if log_file:
         log_dir = os.path.dirname(log_file)
         if log_dir:
             os.makedirs(log_dir, exist_ok=True)
 
-    custom_logger = logging.getLogger(logger_name) if logger_name else logging.getLogger()
+    custom_logger = (
+        logging.getLogger(logger_name) if logger_name else logging.getLogger()
+    )
     custom_logger.setLevel(logging.INFO)
 
     # Reset handlers to avoid duplicates
     if custom_logger.hasHandlers():
         custom_logger.handlers.clear()
-        
+
     # Prevent propagation to root logger to avoid duplicates if root is configured
     if logger_name:
         custom_logger.propagate = False

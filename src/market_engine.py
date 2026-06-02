@@ -1,10 +1,11 @@
 import json
 import os
-import sys
 import threading
 import cloudscraper
 import concurrent.futures
+from shared.shared_logger import setup_logger
 
+logger = setup_logger("logs/sieve.log", "sieve")
 thread_local = threading.local()
 
 
@@ -14,11 +15,6 @@ def get_scraper():
             browser={"browser": "chrome", "platform": "windows", "desktop": True}
         )
     return thread_local.scraper
-
-
-from shared.shared_logger import setup_logger
-
-logger = setup_logger("logs/sieve.log", "sieve")
 
 
 def fetch_market_map() -> dict:

@@ -27,7 +27,6 @@ Supported Sources:
 19. Lyn Alden (RSS)
 """
 
-import sys
 import os
 import json
 import re
@@ -44,7 +43,6 @@ import trafilatura
 from datetime import datetime, timedelta
 from typing import List, Dict, Set
 from dateutil import parser as date_parser
-from market_engine import fetch_market_map
 from daily_job import (
     execute_daily_save_and_reset,
     execute_incremental_save,
@@ -237,7 +235,7 @@ def flush_cache_to_disk():
         try:
             with open(TEMP_CACHE_FILE, "r", encoding="utf-8") as f:
                 existing_data = json.load(f)
-        except:
+        except Exception:
             existing_data = []
 
     existing_data.extend(daily_articles_cache)
