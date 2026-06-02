@@ -6,8 +6,8 @@ import requests
 import holidays
 import pytz
 from datetime import datetime, timedelta
-from .market_engine import fetch_market_map
-from .shared.shared_logger import setup_logger
+from market_engine import fetch_market_map
+from shared.shared_logger import setup_logger
 
 logger = setup_logger("logs/sieve.log", "sieve")
 
@@ -301,7 +301,7 @@ def execute_daily_save_and_reset(
     }
 
     try:
-        project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         data_dir = os.path.join(project_root, "data")
         os.makedirs(data_dir, exist_ok=True)
         filepath = os.path.join(data_dir, filename)
@@ -343,7 +343,7 @@ def execute_incremental_save(daily_articles_cache: list) -> None:
     }
 
     try:
-        project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         data_dir = os.path.join(project_root, "data")
         os.makedirs(data_dir, exist_ok=True)
         filepath = os.path.join(data_dir, filename)
@@ -371,7 +371,7 @@ def execute_premarket_save(daily_articles_cache: list) -> None:
     date_str = now.strftime("%Y%m%d")
     date_formatted = now.strftime("%Y-%m-%d %I:%M %p")
 
-    project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     data_dir = os.path.join(project_root, "data")
     os.makedirs(data_dir, exist_ok=True)
 

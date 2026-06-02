@@ -16,7 +16,7 @@ def get_scraper():
     return thread_local.scraper
 
 
-from .shared.shared_logger import setup_logger
+from shared.shared_logger import setup_logger
 
 logger = setup_logger("logs/sieve.log", "sieve")
 
