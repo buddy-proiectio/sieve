@@ -25,13 +25,13 @@ graph TD
     Sieve -->|1. Fetch HTML| CS[Cloudscraper + Trafilatura]
     CS -->|Clean Text Extraction| Filter[Keyword Filtering & Deduplication]
     Filter -->|Similarity > 0.8 Check| MemoryCache[In-Memory Cache]
-    MemoryCache -->|Flush (>100 articles)| DiskCache[.daily_cache_temp.json]
+    MemoryCache -->|"Flush (>100 articles)"| DiskCache[".daily_cache_temp.json"]
 
     Scheduler[Schedule Engine: EST Timezone] -->|Trigger Points| DailyJob[Daily Job Engine: src/daily_job.py]
     DailyJob -->|Premarket/Incremental/Daily Save| Merge[Merge Cache & Aggregate Data]
 
     YahooAPI[Yahoo Finance API] -->|ThreadPoolExecutor| MarketEngine[Market Engine: src/market_engine.py]
-    Targets[market_map_targets.json] --> MarketEngine
+    Targets["market_map_targets.json"] --> MarketEngine
     Targets -->|Load Watchlist| Sieve
 
     Investing[Investing.com Calendar] -->|Macro Events| ScheduleFetch[Build Weekly Schedule]
@@ -40,7 +40,7 @@ graph TD
 
     MarketEngine -->|Sector/Industry Statistics| Merge
     ScheduleFetch -->|Weekly Event Calendars| Merge
-    Merge -->|Output Payload| DailyDump[data/daily_news_YYYYMMDD.json]
+    Merge -->|Output Payload| DailyDump["data/daily_news_YYYYMMDD.json"]
 ```
 
 ---
@@ -280,4 +280,4 @@ Contributions are welcome! Sieve is an open-source project and we love community
 
 ## 📄 License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
