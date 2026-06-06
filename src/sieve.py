@@ -438,6 +438,87 @@ def strip_html_tags(text: str) -> str:
     return re.sub(clean, "", text).strip()
 
 
+def clean_article_content(text: str, source: str) -> str:
+    if not text:
+        return ""
+
+    # 1. CoinDesk: "More For You" (any case) and everything after it
+    if "CoinDesk" in source:
+        pattern = re.compile(
+            r"\n?\s*\b(More For You|More for you|MORE FOR YOU|More For you)\b",
+            re.IGNORECASE,
+        )
+        match = pattern.search(text)
+        if match:
+            text = text[:match.start()].strip()
+
+    # 2. Cointelegraph: "More on the subject" and everything after it
+    elif "Cointelegraph" in source:
+        pattern = re.compile(
+            r"\n?\s*\b(More on the subject)\b", re.IGNORECASE
+        )
+        match = pattern.search(text)
+        if match:
+            text = text[:match.start()].strip()
+
+    # 3. The Block: footer boilerplates
+    elif "The Block" in source:
+        block_footers = [
+            "Foresight Ventures invests in other companies",
+            "The Block continues to operate independently",
+            "© 2026 The Block",
+            "© 2025 The Block",
+            "© 2024 The Block",
+            "© 2023 The Block",
+            "This article is provided for informational purposes only",
+        ]
+        earliest_idx = len(text)
+        found = False
+        for footer in block_footers:
+            idx = text.find(footer)
+            if idx != -1 and idx < earliest_idx:
+                earliest_idx = idx
+                found = True
+        if found:
+            text = text[:earliest_idx].strip()
+
+    # 4. Bitcoin Magazine: book promos
+    elif "Bitcoin Magazine" in source:
+        bm_footers = [
+            "Discover more in Bitcoin: The Honest Money!",
+            "This excerpt is just the beginning",
+        ]
+        earliest_idx = len(text)
+        found = False
+        for footer in bm_footers:
+            idx = text.find(footer)
+            if idx != -1 and idx < earliest_idx:
+                earliest_idx = idx
+                found = True
+        if found:
+            text = text[:earliest_idx].strip()
+
+    # 5. Seeking Alpha: disclosures
+    elif "Seeking Alpha" in source:
+        sa_footers = [
+            "Seeking Alpha's Disclosure:",
+            "I wrote this article myself, and it expresses my own opinions",
+            "Seeking Alpha is not a licensed securities dealer",
+        ]
+        earliest_idx = len(text)
+        found = False
+        for footer in sa_footers:
+            idx = text.find(footer)
+            if idx != -1 and idx < earliest_idx:
+                earliest_idx = idx
+                found = True
+        if found:
+            text = text[:earliest_idx].strip()
+
+    return text.strip()
+
+
+
 def fetch_full_content(url: str, feed_name: str, title: str) -> tuple[str, str]:
     """
     Attempts to download the full HTML and extract text via trafilatura.
@@ -457,11 +538,24 @@ def fetch_full_content(url: str, feed_name: str, title: str) -> tuple[str, str]:
 
         # Trafilatura handles byte content better to prevent lxml parsing errors and charset issues
         extracted_text = trafilatura.extract(content)
-        if extracted_text and len(extracted_text.strip()) > 50:
-            return extracted_text.strip(), "success"
-        else:
-            logger.debug(f"[Extraction Empty] {feed_name} | {title[:50]}...")
-            return "", "fallback_used"
+        if extracted_text:
+            text_strip = extracted_text.strip()
+            
+            # Paywall & Login gateway check:
+            # If text is relatively short and contains login/subscription keywords, treat it as failed extraction.
+            is_paywall = False
+            if len(text_strip) < 600:
+                paywall_keywords = ["log in", "sign in", "subscribe to", "choose a plan", "create an account", "exclusive content", "sign up for", "support my work"]
+                lower_text = text_strip.lower()
+                hits = sum(1 for kw in paywall_keywords if kw in lower_text)
+                if hits >= 2 or ("log in" in lower_text and len(text_strip) < 300):
+                    is_paywall = True
+                    
+            if len(text_strip) > 50 and not is_paywall:
+                return text_strip, "success"
+                
+        logger.debug(f"[Extraction Empty or Paywall] {feed_name} | {title[:50]}...")
+        return "", "fallback_used"
 
     except Exception as e:
         logger.debug(f"[Scraping Blocked] {feed_name} | {title[:50]}... | {e}")
@@ -531,6 +625,9 @@ def process_rss_feed(feed_name: str, feed_url: str) -> None:
                 if extraction_status == "fallback_used" or not full_content:
                     full_content = summary
                     extraction_status = "fallback_used"
+
+                # Clean the content based on source (boilerplates, 'more for you' loops, etc.)
+                full_content = clean_article_content(full_content, feed_name)
 
                 text_to_search = f"{title} | {full_content}"
                 matched_keywords = find_keywords(text_to_search)
