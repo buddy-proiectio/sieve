@@ -450,16 +450,14 @@ def clean_article_content(text: str, source: str) -> str:
         )
         match = pattern.search(text)
         if match:
-            text = text[:match.start()].strip()
+            text = text[: match.start()].strip()
 
     # 2. Cointelegraph: "More on the subject" and everything after it
     elif "Cointelegraph" in source:
-        pattern = re.compile(
-            r"\n?\s*\b(More on the subject)\b", re.IGNORECASE
-        )
+        pattern = re.compile(r"\n?\s*\b(More on the subject)\b", re.IGNORECASE)
         match = pattern.search(text)
         if match:
-            text = text[:match.start()].strip()
+            text = text[: match.start()].strip()
 
     # 3. The Block: footer boilerplates
     elif "The Block" in source:
@@ -518,7 +516,6 @@ def clean_article_content(text: str, source: str) -> str:
     return text.strip()
 
 
-
 def fetch_full_content(url: str, feed_name: str, title: str) -> tuple[str, str]:
     """
     Attempts to download the full HTML and extract text via trafilatura.
@@ -540,20 +537,29 @@ def fetch_full_content(url: str, feed_name: str, title: str) -> tuple[str, str]:
         extracted_text = trafilatura.extract(content)
         if extracted_text:
             text_strip = extracted_text.strip()
-            
+
             # Paywall & Login gateway check:
             # If text is relatively short and contains login/subscription keywords, treat it as failed extraction.
             is_paywall = False
             if len(text_strip) < 600:
-                paywall_keywords = ["log in", "sign in", "subscribe to", "choose a plan", "create an account", "exclusive content", "sign up for", "support my work"]
+                paywall_keywords = [
+                    "log in",
+                    "sign in",
+                    "subscribe to",
+                    "choose a plan",
+                    "create an account",
+                    "exclusive content",
+                    "sign up for",
+                    "support my work",
+                ]
                 lower_text = text_strip.lower()
                 hits = sum(1 for kw in paywall_keywords if kw in lower_text)
                 if hits >= 2 or ("log in" in lower_text and len(text_strip) < 300):
                     is_paywall = True
-                    
+
             if len(text_strip) > 50 and not is_paywall:
                 return text_strip, "success"
-                
+
         logger.debug(f"[Extraction Empty or Paywall] {feed_name} | {title[:50]}...")
         return "", "fallback_used"
 
