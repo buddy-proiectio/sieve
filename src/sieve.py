@@ -513,6 +513,78 @@ def clean_article_content(text: str, source: str) -> str:
         if found:
             text = text[:earliest_idx].strip()
 
+    # 6. WSJ / Dow Jones (including Motley Fool promos often appended via syndication/ad networks)
+    elif "WSJ" in source:
+        wsj_patterns = [
+            r"Should you invest \$?,?\d+ in .*? right now\?",
+            r"Before you buy stock in .*?, consider this:",
+            r"The Motley Fool Stock Advisor",
+            r"Dow Jones & Company, Inc\.",
+            r"Copyright \d{4} Dow Jones",
+        ]
+        earliest_idx = len(text)
+        found = False
+        for pat in wsj_patterns:
+            match = re.search(pat, text, re.IGNORECASE)
+            if match and match.start() < earliest_idx:
+                earliest_idx = match.start()
+                found = True
+        if found:
+            text = text[:earliest_idx].strip()
+
+    # 7. Yahoo Finance
+    elif "Yahoo Finance" in source:
+        yf_patterns = [
+            r"Read the original article on",
+            r"This story was originally published on",
+            r"Click here for the latest stock market news",
+            r"For more analysis, subscribe to Yahoo Finance Plus",
+        ]
+        earliest_idx = len(text)
+        found = False
+        for pat in yf_patterns:
+            match = re.search(pat, text, re.IGNORECASE)
+            if match and match.start() < earliest_idx:
+                earliest_idx = match.start()
+                found = True
+        if found:
+            text = text[:earliest_idx].strip()
+
+    # 8. CNBC
+    elif "CNBC" in source:
+        cnbc_patterns = [
+            r"WATCH:",
+            r"Sign up for CNBC's newsletters",
+            r"Copyright © \d{4} CNBC",
+        ]
+        earliest_idx = len(text)
+        found = False
+        for pat in cnbc_patterns:
+            match = re.search(pat, text, re.IGNORECASE)
+            if match and match.start() < earliest_idx:
+                earliest_idx = match.start()
+                found = True
+        if found:
+            text = text[:earliest_idx].strip()
+
+    # 9. Newsletters / Blogs (Stratechery, The Diff, SemiAnalysis, Lyn Alden)
+    elif any(ns in source for ns in ["Stratechery", "The Diff", "SemiAnalysis", "Lyn Alden"]):
+        ns_patterns = [
+            r"This is a free preview\. Subscribe to read the rest\.",
+            r"Subscribe to .*? to keep reading",
+            r"This post is public so feel free to share it",
+            r"Share this post",
+        ]
+        earliest_idx = len(text)
+        found = False
+        for pat in ns_patterns:
+            match = re.search(pat, text, re.IGNORECASE)
+            if match and match.start() < earliest_idx:
+                earliest_idx = match.start()
+                found = True
+        if found:
+            text = text[:earliest_idx].strip()
+
     return text.strip()
 
 
