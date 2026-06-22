@@ -273,7 +273,7 @@ def execute_daily_save_and_reset(
     seen_urls: set,
     target_tickers: list,
     finnhub_api_key: str,
-) -> None:
+) -> bool:
     """
     Triggered precisely at 06:00 AM (Local Time).
     Dumps the master daily payload to a timestamped JSON file, then resets.
@@ -286,7 +286,7 @@ def execute_daily_save_and_reset(
         logger.info(
             f"---| US Market is closed (Weekend/Holiday) for {now.strftime('%Y-%m-%d')}. Accumulating data... |---"
         )
-        return
+        return False
 
     date_str = now.strftime("%Y%m%d")
     date_formatted = now.strftime("%Y-%m-%d %I:%M %p")
@@ -311,11 +311,13 @@ def execute_daily_save_and_reset(
         )
     except Exception as e:
         logger.error(f"Failed to save {filename}: {e}")
+        return False
 
     # Purge the in-memory cache to begin the new 24hr cycle
     daily_articles_cache.clear()
     seen_urls.clear()
     logger.info("---| Reset complete. Booting the fresh cycle. |---")
+    return True
 
 
 def execute_incremental_save(daily_articles_cache: list) -> None:

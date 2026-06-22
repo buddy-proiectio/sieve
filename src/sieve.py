@@ -47,6 +47,7 @@ from daily_job import (
     execute_daily_save_and_reset,
     execute_incremental_save,
     execute_premarket_save,
+    is_us_trading_day,
 )
 
 from shared.shared_logger import setup_logger
@@ -349,8 +350,8 @@ def generate_dynamic_rss_feeds() -> Dict[str, str]:
 
 def get_current_window_start() -> datetime:
     """
-    Returns the start datetime of the current 24-hour cycle.
-    The window spans from 06:01 AM today to 06:00 AM tomorrow (Local Time).
+    Returns the start datetime of the current cycle.
+    The window starts from 06:00 AM of the most recent US trading day.
     """
     now = datetime.now(LOCAL_TZ)
     reset_time = datetime.strptime(RESET_TIME_STR, "%H:%M").time()
@@ -362,8 +363,14 @@ def get_current_window_start() -> datetime:
         # After or at 06:00 AM, the cycle started today at 06:00 AM
         start_date = now.date()
 
-    start_dt = datetime.combine(start_date, reset_time)
-    return LOCAL_TZ.localize(start_dt)
+    # Go back day by day until we find a US trading day
+    check_date = start_date
+    while True:
+        check_dt = datetime.combine(check_date, reset_time)
+        check_dt = LOCAL_TZ.localize(check_dt)
+        if is_us_trading_day(check_dt):
+            return check_dt
+        check_date -= timedelta(days=1)
 
 
 def parse_published_time(published_str: str) -> datetime:
@@ -774,14 +781,21 @@ def trigger_daily_save():
             "FINNHUB_API_KEY environment variable is not set. Earnings calendar will be skipped."
         )
 
-    execute_daily_save_and_reset(
+    saved = execute_daily_save_and_reset(
         all_articles,
         seen_urls,
         TARGET_TICKERS,
         finnhub_key,
     )
 
-    daily_articles_cache.clear()
+    if saved:
+        daily_articles_cache.clear()
+    else:
+        # Restores the cache locally since it was not saved/reset
+        daily_articles_cache.clear()
+        daily_articles_cache.extend(all_articles)
+        # Flush to disk if it exceeds limits to prevent high RAM usage
+        flush_cache_to_disk()
 
 
 def trigger_incremental_save():
