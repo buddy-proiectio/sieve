@@ -575,7 +575,9 @@ def clean_article_content(text: str, source: str) -> str:
             text = text[:earliest_idx].strip()
 
     # 9. Newsletters / Blogs (Stratechery, The Diff, SemiAnalysis, Lyn Alden)
-    elif any(ns in source for ns in ["Stratechery", "The Diff", "SemiAnalysis", "Lyn Alden"]):
+    elif any(
+        ns in source for ns in ["Stratechery", "The Diff", "SemiAnalysis", "Lyn Alden"]
+    ):
         ns_patterns = [
             r"This is a free preview\. Subscribe to read the rest\.",
             r"Subscribe to .*? to keep reading",
@@ -847,7 +849,7 @@ def main():
             schedule.every().day.at("00:00", tz=LOCAL_TZ_NAME).do(
                 trigger_incremental_save
             )
-            schedule.every().day.at("03:00", tz=LOCAL_TZ_NAME).do(
+            schedule.every().day.at("04:00", tz=LOCAL_TZ_NAME).do(
                 trigger_incremental_save
             )
             schedule.every().day.at("06:00", tz=LOCAL_TZ_NAME).do(trigger_daily_save)
@@ -855,7 +857,7 @@ def main():
                 trigger_premarket_save
             )
             logger.info(
-                f"Scheduled incremental saves for 00:00, 03:00 {LOCAL_TZ_NAME} timezone."
+                f"Scheduled incremental saves for 00:00, 04:00 {LOCAL_TZ_NAME} timezone."
             )
             logger.info(f"Scheduled daily dump for 06:00 {LOCAL_TZ_NAME} timezone.")
             logger.info(f"Scheduled premarket dump for 08:30 {LOCAL_TZ_NAME} timezone.")

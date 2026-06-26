@@ -114,7 +114,7 @@ All schedule points are aligned with the US Eastern Time Zone (**America/New_Yor
 | Job                    | Frequency / Execution Time (Local Time) | Role & Operational Details                                                                                                                                  |
 | :--------------------- | :-------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **News Scraping Loop** | Every `10 minutes`                      | Iterates over dynamic RSS feeds, processes text extraction, filters keywords, and caches matches.                                                           |
-| **Incremental Save**   | Daily at `00:00` and `03:00`            | Saves currently cached articles to prevent data loss in case of server crashes (does not clear cache).                                                      |
+| **Incremental Save**   | Daily at `00:00` and `04:00`            | Saves currently cached articles to prevent data loss in case of server crashes (does not clear cache).                                                      |
 | **Premarket Save**     | Daily at `08:30`                        | Merges the 06:00 AM dump with subsequent articles to form `premarket_news_YYYYMMDD.json` before market open.                                                |
 | **Daily Save & Reset** | Daily at `06:00`                        | Merges memory/disk caches, fetches market maps and weekly calendars, writes the final `daily_news_YYYYMMDD.json`, and resets cache for the next 24hr cycle. |
 
