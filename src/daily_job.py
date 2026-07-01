@@ -46,6 +46,154 @@ US_HOLIDAYS_MAP = {
 }
 
 
+def fetch_investing_macro_events(
+    start_date_str: str, end_date_str: str
+) -> tuple[dict, dict]:
+    """
+    Fetches English and Korean macro events from Investing.com calendar.
+    If direct fetching fails (e.g. HTTP 403 due to Cloudflare IP blocks),
+    falls back to trying free HTTP proxies retrieved dynamically from multiple sources.
+    Retries until successful or raises Exception after exhaustion.
+    """
+    import random
+    import time
+    import concurrent.futures
+
+    base_url = "https://endpoints.investing.com/pd-instruments/v1/calendars/economic/events/occurrences"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    }
+    params_en = {
+        "limit": "200",
+        "start_date": start_date_str,
+        "end_date": end_date_str,
+        "country_ids": "25,37,72,17,35,12,4,5,11",
+        "importance": "high,medium",
+    }
+    params_ko = params_en.copy()
+    params_ko["domain_id"] = "18"
+
+    # Attempt 1: Direct fetch
+    try:
+        logger.info(
+            "Attempting direct fetch of English macro events from Investing.com..."
+        )
+        with requests.get(
+            base_url, params=params_en, headers=headers, timeout=15
+        ) as en_res:
+            if en_res.status_code == 200:
+                en_data = en_res.json()
+                if "events" in en_data:
+                    logger.info(
+                        "Attempting direct fetch of Korean macro events from Investing.com..."
+                    )
+                    with requests.get(
+                        base_url, params=params_ko, headers=headers, timeout=15
+                    ) as ko_res:
+                        if ko_res.status_code == 200:
+                            ko_data = ko_res.json()
+                            if "events" in ko_data:
+                                logger.info(
+                                    "Successfully fetched macro events directly!"
+                                )
+                                return en_data, ko_data
+    except Exception as e:
+        logger.warning(f"Direct fetch failed: {e}. Proceeding to proxy fallback...")
+
+    # Fallback to proxies
+    max_attempts = 30
+    for attempt in range(1, max_attempts + 1):
+        logger.info(
+            f"Proxy attempt {attempt}/{max_attempts}: Retrieving proxy lists..."
+        )
+        proxy_urls = [
+            "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt",
+            "https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/http.txt",
+            "https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=5000&country=all&ssl=all&anonymity=all",
+        ]
+
+        proxies = []
+        for p_url in proxy_urls:
+            try:
+                r = requests.get(p_url, timeout=10)
+                if r.status_code == 200:
+                    proxies.extend(r.text.strip().splitlines())
+            except Exception as pe:
+                logger.debug(f"Failed to fetch proxy list from {p_url}: {pe}")
+
+        proxies = list(set([p.strip() for p in proxies if p.strip()]))
+        if not proxies:
+            logger.warning(
+                "No proxies retrieved. Sleeping for 15 seconds before retry..."
+            )
+            time.sleep(15)
+            continue
+
+        random.shuffle(proxies)
+        logger.info(f"Retrieved {len(proxies)} proxies. Testing them concurrently...")
+
+        def try_proxy(proxy):
+            px = {"http": f"http://{proxy}", "https": f"http://{proxy}"}
+            try:
+                # 1. Fetch English
+                en_res = requests.get(
+                    base_url, params=params_en, headers=headers, proxies=px, timeout=5
+                )
+                if en_res.status_code == 200:
+                    en_js = en_res.json()
+                    if "events" in en_js:
+                        # 2. Fetch Korean
+                        ko_res = requests.get(
+                            base_url,
+                            params=params_ko,
+                            headers=headers,
+                            proxies=px,
+                            timeout=5,
+                        )
+                        if ko_res.status_code == 200:
+                            ko_js = ko_res.json()
+                            if "events" in ko_js:
+                                return proxy, en_js, ko_js
+            except Exception:
+                pass
+            return None
+
+        # Test up to 500 proxies per attempt
+        max_test_proxies = min(len(proxies), 500)
+        batch_size = 50
+        en_data, ko_data = None, None
+        working_proxy = None
+
+        for i in range(0, max_test_proxies, batch_size):
+            batch = proxies[i : i + batch_size]
+            logger.info(
+                f"Testing batch {i // batch_size + 1} ({len(batch)} proxies)..."
+            )
+
+            with concurrent.futures.ThreadPoolExecutor(max_workers=25) as executor:
+                futures = {executor.submit(try_proxy, p): p for p in batch}
+                for fut in concurrent.futures.as_completed(futures):
+                    res = fut.result()
+                    if res:
+                        working_proxy, en_data, ko_data = res
+                        break
+
+            if en_data and ko_data:
+                logger.info(
+                    f"SUCCESS: Fetched Investing.com calendar via proxy {working_proxy}"
+                )
+                return en_data, ko_data
+
+        logger.warning(
+            f"Attempt {attempt}/{max_attempts} failed to find a working proxy. Sleeping for 20 seconds..."
+        )
+        time.sleep(20)
+
+    raise RuntimeError(
+        "Failed to fetch Investing.com economic calendar via any method/proxy after multiple attempts."
+    )
+
+
 def fetch_weekly_schedule(finnhub_api_key: str, target_tickers: list) -> list:
     """
     Fetches Macro Events (via Investing.com economic calendar API), Earnings Calls (via Finnhub API),
@@ -114,39 +262,7 @@ def fetch_weekly_schedule(finnhub_api_key: str, target_tickers: list) -> list:
     # Part A: Macro Events (via Investing.com API)
     # --------------------------------------------------------------------------
     try:
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-        }
-
-        base_url = "https://endpoints.investing.com/pd-instruments/v1/calendars/economic/events/occurrences"
-        params_en = {
-            "limit": "200",
-            "start_date": start_date_str,
-            "end_date": end_date_str,
-            "country_ids": "25,37,72,17,35,12,4,5,11",
-            "importance": "high,medium",
-        }
-
-        logger.info(
-            f"Fetching English Macro Events from Investing.com: {base_url} with params {params_en}"
-        )
-        with requests.get(
-            base_url, params=params_en, headers=headers, timeout=30
-        ) as en_response:
-            en_response.raise_for_status()
-            en_data = en_response.json()
-
-        params_ko = params_en.copy()
-        params_ko["domain_id"] = "18"
-
-        logger.info(
-            f"Fetching Korean Macro Events from Investing.com: {base_url} with params {params_ko}"
-        )
-        with requests.get(
-            base_url, params=params_ko, headers=headers, timeout=30
-        ) as ko_response:
-            ko_response.raise_for_status()
-            ko_data = ko_response.json()
+        en_data, ko_data = fetch_investing_macro_events(start_date_str, end_date_str)
 
         en_events_dict = {item["event_id"]: item for item in en_data.get("events", [])}
         ko_events_dict = {item["event_id"]: item for item in ko_data.get("events", [])}
